@@ -1,118 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'certificates', label: 'Achievements' },
-    { id: 'study', label: 'Study' },
-    { id: 'contact', label: 'Contact' }
+const navLinks = [
+  { name: 'Home',         href: '#home'         },
+  { name: 'About',        href: '#about'        },
+  { name: 'Journey',      href: '#journey'      },
+  { name: 'Skills',       href: '#skills'       },
+  { name: 'Projects',     href: '#projects'     },
+  { name: 'Certificates', href: '#certificates' },
+  { name: 'Contact',      href: '#contact'      },
 ];
 
-const Navbar = ({ activeSection, setActiveSection }) => {
-    const [scrolled, setScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+export default function Navbar() {
+  const [isOpen, setIsOpen]   = useState(false);
+  const [active, setActive]   = useState('home');
+  const [scrolled, setScrolled] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 20;
-            if (isScrolled !== scrolled) {
-                setScrolled(isScrolled);
-            }
-        };
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
+  }, []);
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [scrolled]);
-
-    const scrollToSection = (id) => {
-        const element = document.getElementById(id);
-        if (element) {
-            // Adjust offset for fixed navbar
-            const yOffset = -80;
-            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-            setActiveSection(id);
-        }
-        setIsMobileMenuOpen(false);
-    };
-
-    return (
-        <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#0b0f19]/80 backdrop-blur-xl border-b shadow-2xl border-[rgba(255,255,255,0.05)] py-4' : 'bg-transparent py-8'
-                }`}
-        >
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
-                <div
-                    className="text-3xl font-extrabold tracking-tighter cursor-pointer gradient-text"
-                    onClick={() => scrollToSection('home')}
-                >
-                    JV.
-                </div>
-
-                {/* Desktop Menu */}
-                <div className="hidden lg:flex items-center space-x-2 bg-[rgba(255,255,255,0.03)] p-1.5 rounded-full border border-[rgba(255,255,255,0.05)]">
-                    {navItems.map((item) => (
-                        <button
-                            key={item.id}
-                            onClick={() => scrollToSection(item.id)}
-                            className={`px-5 py-2 rounded-full text-sm font-semibold transition-all relative ${activeSection === item.id ? 'text-white' : 'text-gray-400 hover:text-white hover:bg-[rgba(255,255,255,0.05)]'
-                                }`}
-                        >
-                            {activeSection === item.id && (
-                                <motion.div
-                                    layoutId="navbar-indicator"
-                                    className="absolute inset-0 bg-gradient-to-r from-[#8b5cf6]/40 to-[#3b82f6]/40 border border-[#8b5cf6]/50 rounded-full"
-                                    initial={false}
-                                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                />
-                            )}
-                            <span className="relative z-10 tracking-wide">{item.label}</span>
-                        </button>
-                    ))}
-                </div>
-
-                {/* Mobile Menu Toggle */}
-                <div className="lg:hidden">
-                    <button
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="text-gray-300 hover:text-white focus:outline-none p-2 bg-[rgba(255,255,255,0.05)] rounded-lg border border-[rgba(255,255,255,0.1)]"
-                    >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            {isMobileMenuOpen ? (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            ) : (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                            )}
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="absolute top-full left-0 right-0 bg-[#0b0f19]/95 backdrop-blur-xl border-b border-[rgba(255,255,255,0.05)] shadow-2xl lg:hidden py-6 px-6 flex flex-col space-y-4"
-                >
-                    {navItems.map((item) => (
-                        <button
-                            key={item.id}
-                            onClick={() => scrollToSection(item.id)}
-                            className={`text-left text-lg font-medium px-4 py-3 rounded-xl transition-colors ${activeSection === item.id ? 'bg-[rgba(139,92,246,0.15)] border border-[#8b5cf6]/30 text-white' : 'text-gray-400 hover:text-white hover:bg-[rgba(255,255,255,0.05)]'
-                                }`}
-                        >
-                            {item.label}
-                        </button>
-                    ))}
-                </motion.div>
-            )}
-        </nav>
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }),
+      { rootMargin: '-40% 0px -55% 0px' }
     );
-};
+    navLinks.forEach(l => { const el = document.getElementById(l.href.slice(1)); if (el) obs.observe(el); });
+    return () => obs.disconnect();
+  }, []);
 
-export default Navbar;
+  const go = href => { setIsOpen(false); document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }); };
+
+  return (
+    <nav className="fixed top-0 left-0 w-full z-50 transition-all duration-300"
+      style={{
+        background: scrolled ? 'rgba(10,10,10,0.92)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+      }}>
+      <div className="max-w-6xl mx-auto px-6 md:px-16">
+        <div className="flex justify-between h-16 items-center">
+          <a href="#home" onClick={e => { e.preventDefault(); go('#home'); }}
+            className="font-black text-white text-xl tracking-tighter hover:opacity-60 transition-opacity">
+            JV<span className="text-white/20">.</span>
+          </a>
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map(l => (
+              <a key={l.name} href={l.href} onClick={e => { e.preventDefault(); go(l.href); }}
+                className={`font-mono text-xs tracking-widest uppercase transition-colors duration-200 ${
+                  active === l.href.slice(1) ? 'text-white' : 'text-white/30 hover:text-white/70'
+                }`}>
+                {l.name}
+              </a>
+            ))}
+          </div>
+          <div className="md:hidden">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-white/60 hover:text-white p-1">
+              {isOpen ? <X size={22}/> : <Menu size={22}/>}
+            </button>
+          </div>
+        </div>
+      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
+            className="md:hidden overflow-hidden" style={{ background: '#0a0a0a', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+            <div className="px-6 py-4 flex flex-col">
+              {navLinks.map(l => (
+                <a key={l.name} href={l.href} onClick={e => { e.preventDefault(); go(l.href); }}
+                  className="font-mono text-xs tracking-widest uppercase text-white/40 hover:text-white py-4 border-b border-white/[0.05] transition-colors">
+                  {l.name}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+}
