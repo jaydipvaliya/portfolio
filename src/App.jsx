@@ -11,7 +11,7 @@ import Certificates from './components/Certificates';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
-import FlowingLines from './components/FlowingLines';
+import FlowingLines from './components/Flowinglines';
 
 function Portfolio() {
   const [loading, setLoading] = useState(true);
