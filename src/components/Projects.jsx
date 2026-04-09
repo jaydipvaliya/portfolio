@@ -1,17 +1,80 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Globe } from 'lucide-react';
 
 const projects = [
-  { title: 'Ekagra App',         desc: 'A productivity and focus app built with React and Node.js to help users manage tasks and eliminate distractions.',                 tech: ['React','Node.js','MongoDB'],   tags: ['React','Fullstack'],          github: 'https://github.com/jaydipvaliya' },
-  { title: 'Bentley Clone',      desc: 'A pixel-perfect clone of the Bentley Motors website showcasing advanced CSS animations and responsive design.',                   tech: ['HTML','CSS','JavaScript'],     tags: ['Clone','CSS'],                github: 'https://github.com/jaydipvaliya' },
-  { title: 'DJI Clone',          desc: "Frontend clone of DJI's product landing page with smooth scroll animations and interactive product showcases.",                   tech: ['HTML','CSS','JavaScript'],     tags: ['Clone','CSS'],                github: 'https://github.com/jaydipvaliya' },
-  { title: 'Udaan Clone',        desc: 'Full-stack e-commerce clone inspired by Udaan B2B platform with product listings and cart management.',                           tech: ['React','Express','MongoDB'],   tags: ['React','Fullstack','Clone'],  github: 'https://github.com/jaydipvaliya' },
-  { title: 'Memory Flip Game',   desc: 'Classic memory card-matching game with multiple difficulty levels, score tracking, and smooth flip animations.',                  tech: ['React','CSS'],                 tags: ['React','Game'],               github: 'https://github.com/jaydipvaliya' },
-  { title: 'Color Guessing Zone',desc: 'Interactive color guessing game to train your eye for exact RGB values with a leaderboard and timer.',                            tech: ['JavaScript','HTML','CSS'],     tags: ['JavaScript','Game'],          github: 'https://github.com/jaydipvaliya' },
-  { title: 'Whack-a-Mole',       desc: 'Browser-based whack-a-mole arcade game with increasing speed levels and high score tracking.',                                   tech: ['JavaScript','HTML','CSS'],     tags: ['JavaScript','Game'],          github: 'https://github.com/jaydipvaliya' },
-  { title: 'Drop Clone',         desc: 'Frontend clone of the Dropbox landing page with responsive layout and clean modern design.',                                      tech: ['HTML','CSS'],                  tags: ['Clone','CSS'],                github: 'https://github.com/jaydipvaliya' },
-  { title: 'Click Counter',      desc: 'Minimalist click-counter web app with animated count display, reset functionality, and keyboard shortcuts.',                      tech: ['JavaScript','HTML','CSS'],     tags: ['JavaScript'],                 github: 'https://github.com/jaydipvaliya' },
+  {
+    title: 'Ekagra App',
+    desc: 'A productivity and focus app built with React and Node.js to help users manage tasks and eliminate distractions.',
+    tech: ['React', 'Node.js', 'MongoDB'],
+    tags: ['React', 'Fullstack'],
+    github: 'https://github.com/jaydipvaliya/Ekagra-app',
+    live: 'https://ekagra-app-zjbl.vercel.app/',
+  },
+  {
+    title: 'Bentley Clone',
+    desc: 'A pixel-perfect clone of the Bentley Motors website showcasing advanced CSS animations and responsive design.',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    tags: ['Clone', 'CSS'],
+    github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/Bentali%20clone.cg',
+    live: 'https://bentley-clone.netlify.app/',
+  },
+  {
+    title: 'DJI Clone',
+    desc: "Frontend clone of DJI's product landing page with smooth scroll animations and interactive product showcases.",
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    tags: ['Clone', 'CSS'],
+    github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/dji%20clone.cg',
+    live: 'https://dji-clone-project.netlify.app/',
+  },
+  {
+    title: 'Udaan Clone',
+    desc: 'Full-stack e-commerce clone inspired by Udaan B2B platform with product listings and cart management.',
+    tech: ['React', 'Express', 'MongoDB'],
+    tags: ['React', 'Fullstack', 'Clone'],
+    github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/udaan%20clone.cg',
+    live: 'https://udaan-clone.netlify.app/',
+  },
+  {
+    title: 'Drop Clone',
+    desc: 'Frontend clone of the Dropbox landing page with responsive layout and clean modern design.',
+    tech: ['HTML', 'CSS'],
+    tags: ['Clone', 'CSS'],
+    github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/drop%20clone.cg',
+    live: 'https://drop-clone.netlify.app/',
+  },
+  {
+    title: 'Memory Flip Game',
+    desc: 'Classic memory card-matching game with multiple difficulty levels, score tracking, and smooth flip animations.',
+    tech: ['JavaScript', 'HTML', 'CSS'],
+    tags: ['JavaScript', 'Game'],
+    github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/memory%20flip%20card%20game',
+    live: 'https://gamethron-memory-flip.netlify.app/',
+  },
+  {
+    title: 'Color Guessing Zone',
+    desc: 'Interactive color guessing game to train your eye for exact RGB values with a leaderboard and timer.',
+    tech: ['JavaScript', 'HTML', 'CSS'],
+    tags: ['JavaScript', 'Game'],
+    github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/color%20guessing',
+    live: 'https://gamethron-color-gassing.netlify.app/',
+  },
+  {
+    title: 'Whack-a-Mole',
+    desc: 'Browser-based whack-a-mole arcade game with increasing speed levels and high score tracking.',
+    tech: ['JavaScript', 'HTML', 'CSS'],
+    tags: ['JavaScript', 'Game'],
+    github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/Whack-a-Mole',
+    live: 'https://gamethron-wake-a-mole.netlify.app/',
+  },
+  {
+    title: 'Click Counter',
+    desc: 'Minimalist click-counter web app with animated count display, reset functionality, and keyboard shortcuts.',
+    tech: ['JavaScript', 'HTML', 'CSS'],
+    tags: ['JavaScript'],
+    github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/clickcount',
+    live: 'https://gamethron-click-count.netlify.app/',
+  },
 ];
 
 const filters = ['All','React','Fullstack','Clone','Game','JavaScript','CSS'];
@@ -93,13 +156,24 @@ export default function Projects() {
                       <h3 className="font-black text-white/75 group-hover:text-white transition-colors text-base leading-snug" style={{ letterSpacing: '-0.02em' }}>
                         {p.title}
                       </h3>
-                      {p.github && (
-                        <a href={p.github} target="_blank" rel="noopener noreferrer"
-                          className="text-white/20 hover:text-white transition-colors shrink-0 mt-0.5"
-                          onClick={e => e.stopPropagation()}>
-                          <ArrowUpRight size={16}/>
-                        </a>
-                      )}
+                      <div className="flex items-center gap-2 shrink-0 mt-0.5">
+                        {p.live && (
+                          <a href={p.live} target="_blank" rel="noopener noreferrer"
+                            className="text-white/20 hover:text-white transition-colors"
+                            title="Live Demo"
+                            onClick={e => e.stopPropagation()}>
+                            <Globe size={15}/>
+                          </a>
+                        )}
+                        {p.github && (
+                          <a href={p.github} target="_blank" rel="noopener noreferrer"
+                            className="text-white/20 hover:text-white transition-colors"
+                            title="GitHub"
+                            onClick={e => e.stopPropagation()}>
+                            <ArrowUpRight size={16}/>
+                          </a>
+                        )}
+                      </div>
                     </div>
 
                     <p className="text-white/35 text-sm font-light leading-relaxed flex-1 group-hover:text-white/55 transition-colors">
@@ -115,7 +189,16 @@ export default function Projects() {
                           </span>
                         ))}
                       </div>
-                      <p className="font-mono text-[11px] text-white/15 tracking-wide">{p.tech.join(' · ')}</p>
+                      <div className="flex items-center justify-between">
+                        <p className="font-mono text-[11px] text-white/15 tracking-wide">{p.tech.join(' · ')}</p>
+                        {p.live && (
+                          <a href={p.live} target="_blank" rel="noopener noreferrer"
+                            className="font-mono text-[10px] tracking-widest uppercase text-white/25 hover:text-white/70 border border-white/[0.07] hover:border-white/25 px-2 py-1 transition-all flex items-center gap-1"
+                            onClick={e => e.stopPropagation()}>
+                            <Globe size={10}/> Live
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </motion.div>
