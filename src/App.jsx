@@ -1,17 +1,38 @@
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Journey from './components/Journey';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Certificates from './components/Certificates';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import FlowingLines from './components/Flowinglines';
+
+// Pages
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import JourneyPage from './pages/JourneyPage';
+import SkillsPage from './pages/SkillsPage';
+import ProjectsPage from './pages/ProjectsPage';
+import CertificatesPage from './pages/CertificatesPage';
+import ContactPage from './pages/ContactPage';
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/journey" element={<JourneyPage />} />
+        <Route path="/skills" element={<SkillsPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/certificates" element={<CertificatesPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 function Portfolio() {
   const [loading, setLoading] = useState(true);
@@ -44,15 +65,7 @@ function Portfolio() {
           style={{ position: 'relative', zIndex: 1 }}
         >
           <Navbar />
-          <main>
-            <Hero />
-            <About />
-            <Journey />
-            <Skills />
-            <Projects />
-            <Certificates />
-            <Contact />
-          </main>
+          <AnimatedRoutes />
           <Footer />
         </motion.div>
       )}
@@ -62,8 +75,10 @@ function Portfolio() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <Portfolio />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <Portfolio />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }

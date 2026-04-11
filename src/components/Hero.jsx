@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Code2, Download, ArrowDown } from 'lucide-react';
 
@@ -28,6 +29,8 @@ function Marquee() {
 }
 
 export default function Hero() {
+  const navigate = useNavigate();
+
   return (
     <section id="home" className="min-h-screen flex flex-col justify-center pt-20 pb-10 px-6 md:px-16"
       style={{ background: 'transparent' }}>
@@ -73,11 +76,11 @@ export default function Hero() {
             B.Tech CSE @ Swaminarayan University.
           </p>
           <div className="ml-auto flex gap-3 shrink-0">
-            <a href="#contact"
-              onClick={e => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-              className="px-6 py-3 text-sm font-semibold text-black bg-white hover:bg-white/90 transition-colors">
+            <button
+              onClick={() => navigate('/contact')}
+              className="px-6 py-3 text-sm font-semibold text-black bg-white hover:bg-white/90 transition-colors cursor-pointer">
               Get in Touch
-            </a>
+            </button>
             <a href="/resume.pdf" download="Jaydip_Valiya_Resume.pdf"
               className="px-6 py-3 text-sm font-semibold text-white border border-white/20 hover:border-white/50 transition-colors flex items-center gap-2">
               <Download size={15}/> Resume

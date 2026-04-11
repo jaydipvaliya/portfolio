@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { name: 'Home',         href: '#home'         },
-  { name: 'About',        href: '#about'        },
-  { name: 'Journey',      href: '#journey'      },
-  { name: 'Skills',       href: '#skills'       },
-  { name: 'Projects',     href: '#projects'     },
-  { name: 'Certificates', href: '#certificates' },
-  { name: 'Contact',      href: '#contact'      },
+  { name: 'Home',         to: '/'              },
+  { name: 'About',        to: '/about'         },
+  { name: 'Journey',      to: '/journey'       },
+  { name: 'Skills',       to: '/skills'        },
+  { name: 'Projects',     to: '/projects'      },
+  { name: 'Certificates', to: '/certificates'  },
+  { name: 'Contact',      to: '/contact'       },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen]   = useState(false);
-  const [active, setActive]   = useState('home');
+  const [isOpen, setIsOpen]     = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
@@ -23,16 +24,11 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
+  // Close mobile menu on route change
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }),
-      { rootMargin: '-40% 0px -55% 0px' }
-    );
-    navLinks.forEach(l => { const el = document.getElementById(l.href.slice(1)); if (el) obs.observe(el); });
-    return () => obs.disconnect();
-  }, []);
-
-  const go = href => { setIsOpen(false); document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }); };
+    setIsOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 transition-all duration-300"
@@ -43,18 +39,22 @@ export default function Navbar() {
       }}>
       <div className="max-w-6xl mx-auto px-6 md:px-16">
         <div className="flex justify-between h-16 items-center">
-          <a href="#home" onClick={e => { e.preventDefault(); go('#home'); }}
+          <NavLink to="/"
             className="font-black text-white text-xl tracking-tighter hover:opacity-60 transition-opacity">
             JV<span className="text-white/20">.</span>
-          </a>
+          </NavLink>
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map(l => (
-              <a key={l.name} href={l.href} onClick={e => { e.preventDefault(); go(l.href); }}
-                className={`font-mono text-xs tracking-widest uppercase transition-colors duration-200 ${
-                  active === l.href.slice(1) ? 'text-white' : 'text-white/30 hover:text-white/70'
-                }`}>
+              <NavLink key={l.name} to={l.to}
+                className={({ isActive }) =>
+                  `font-mono text-xs tracking-widest uppercase transition-colors duration-200 ${
+                    isActive ? 'text-white' : 'text-white/30 hover:text-white/70'
+                  }`
+                }
+                end={l.to === '/'}
+              >
                 {l.name}
-              </a>
+              </NavLink>
             ))}
           </div>
           <div className="md:hidden">
@@ -68,12 +68,23 @@ export default function Navbar() {
         {isOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
             className="md:hidden overflow-hidden" style={{ background: '#0a0a0a', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="px-6 py-4 flex flex-col">
+          <div className="px-6 py-2 flex flex-col">
               {navLinks.map(l => (
-                <a key={l.name} href={l.href} onClick={e => { e.preventDefault(); go(l.href); }}
-                  className="font-mono text-xs tracking-widest uppercase text-white/40 hover:text-white py-4 border-b border-white/[0.05] transition-colors">
+                <NavLink
+                  key={l.name}
+                  to={l.to}
+                  end={l.to === '/'}
+                  className={({ isActive }) =>
+                    `text-left font-mono text-sm tracking-widest uppercase py-4 border-b border-white/[0.05] transition-colors w-full flex items-center justify-between ${
+                      isActive ? 'text-white' : 'text-white/40 hover:text-white/80'
+                    }`
+                  }
+                >
                   {l.name}
-                </a>
+                  {location.pathname === l.to && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
+                  )}
+                </NavLink>
               ))}
             </div>
           </motion.div>
