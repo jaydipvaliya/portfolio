@@ -9,13 +9,14 @@ const milestones = [
 
 export default function Journey() {
   return (
-    <section id="journey" className="py-24 px-6 md:px-16" style={{ background: 'transparent' }}>
+    <section id="journey" className="py-24 px-6 md:px-16" style={{ background: 'transparent' }}
+      aria-label="Educational journey and timeline">
       <div className="max-w-6xl mx-auto">
 
         <motion.div className="flex items-center gap-4 mb-16"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">03 / Journey</span>
-          <div className="flex-1 h-px bg-white/10"/>
+          <div className="flex-1 h-px bg-white/10" aria-hidden="true"/>
         </motion.div>
 
         <div className="mb-16">
@@ -37,16 +38,23 @@ export default function Journey() {
           </div>
         </div>
 
-        <div className="border-t border-white/[0.07]">
+        <div className="border-t border-white/[0.07]" role="list" aria-label="Education milestones">
           {milestones.map(({ year, title, institution, location, description, current }, i) => (
-            <motion.div key={title}
+            <motion.article key={title}
+              role="listitem"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.12 }}
               className="group grid md:grid-cols-[160px_1fr] gap-6 py-10 border-b border-white/[0.07] hover:border-white/20 transition-colors">
               <div className="flex md:flex-col gap-3 items-start">
-                <span className="font-mono text-xs tracking-widest text-white/25 group-hover:text-white/50 transition-colors">{year}</span>
+                <time className="font-mono text-xs tracking-widest text-white/25 group-hover:text-white/50 transition-colors"
+                  dateTime={year.split('–')[0]}>
+                  {year}
+                </time>
                 {current && (
-                  <span className="font-mono text-[10px] tracking-widest text-white/40 border border-white/15 px-2 py-0.5 uppercase">Current</span>
+                  <span className="font-mono text-[10px] tracking-widest text-white/40 border border-white/15 px-2 py-0.5 uppercase"
+                    aria-label="Currently enrolled">
+                    Current
+                  </span>
                 )}
               </div>
               <div>
@@ -59,7 +67,7 @@ export default function Journey() {
                   {description}
                 </p>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

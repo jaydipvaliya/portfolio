@@ -87,13 +87,14 @@ export default function Projects() {
   const filtered = activeFilter === 'All' ? projects : projects.filter(p => p.tags.includes(activeFilter));
 
   return (
-    <section id="projects" className="py-24 px-6 md:px-16" style={{ background: 'transparent' }}>
+    <section id="projects" className="py-24 px-6 md:px-16" style={{ background: 'transparent' }}
+      aria-label="Selected projects by Jaydip Valiya">
       <div className="max-w-6xl mx-auto">
 
         <motion.div className="flex items-center gap-4 mb-16"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">05 / Projects</span>
-          <div className="flex-1 h-px bg-white/10"/>
+          <div className="flex-1 h-px bg-white/10" aria-hidden="true"/>
         </motion.div>
 
         <div className="mb-12">
@@ -116,24 +117,26 @@ export default function Projects() {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-2.5 mb-12">
+        <nav className="flex flex-wrap gap-2.5 mb-12" aria-label="Project category filters">
           {filters.map(f => (
             <button key={f} onClick={() => setActiveFilter(f)}
+              aria-pressed={activeFilter === f}
               className={`font-mono text-xs tracking-widest uppercase px-4 py-2 border transition-all duration-200 ${
                 activeFilter === f ? 'text-white border-white/40 bg-white/[0.06]' : 'text-white/25 border-white/[0.07] hover:text-white/60 hover:border-white/20'
               }`}>
               {f}
             </button>
           ))}
-        </div>
+        </nav>
 
         {/* Cards */}
-        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" role="list">
           <AnimatePresence mode="popLayout">
             {filtered.map((p, i) => {
               const accent = getAccent(p.tags);
               return (
-                <motion.div key={p.title} layout
+                <motion.article key={p.title} layout
+                  role="listitem"
                   initial={{ opacity: 0, y: 24, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
@@ -144,10 +147,10 @@ export default function Projects() {
                   onMouseEnter={e => { e.currentTarget.style.borderColor=`${accent}50`; e.currentTarget.style.boxShadow=`0 0 40px ${accent}18`; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.07)'; e.currentTarget.style.boxShadow='none'; }}>
 
-                  <div className="h-[2px] w-full shrink-0"
+                  <div className="h-[2px] w-full shrink-0" aria-hidden="true"
                     style={{ background: `linear-gradient(90deg, ${accent}90, ${accent}20, transparent)` }}/>
 
-                  <span className="absolute top-4 right-4 font-mono text-[11px] text-white/10 group-hover:text-white/25 transition-colors select-none">
+                  <span className="absolute top-4 right-4 font-mono text-[11px] text-white/10 group-hover:text-white/25 transition-colors select-none" aria-hidden="true">
                     {String(i + 1).padStart(2, '0')}
                   </span>
 
@@ -160,7 +163,7 @@ export default function Projects() {
                         {p.live && (
                           <a href={p.live} target="_blank" rel="noopener noreferrer"
                             className="text-white/20 hover:text-white transition-colors"
-                            title="Live Demo"
+                            aria-label={`Live demo of ${p.title}`}
                             onClick={e => e.stopPropagation()}>
                             <Globe size={15}/>
                           </a>
@@ -168,7 +171,7 @@ export default function Projects() {
                         {p.github && (
                           <a href={p.github} target="_blank" rel="noopener noreferrer"
                             className="text-white/20 hover:text-white transition-colors"
-                            title="GitHub"
+                            aria-label={`GitHub repository for ${p.title}`}
                             onClick={e => e.stopPropagation()}>
                             <ArrowUpRight size={16}/>
                           </a>
@@ -194,6 +197,7 @@ export default function Projects() {
                         {p.live && (
                           <a href={p.live} target="_blank" rel="noopener noreferrer"
                             className="font-mono text-[10px] tracking-widest uppercase text-white/25 hover:text-white/70 border border-white/[0.07] hover:border-white/25 px-2 py-1 transition-all flex items-center gap-1"
+                            aria-label={`View live demo of ${p.title}`}
                             onClick={e => e.stopPropagation()}>
                             <Globe size={10}/> Live
                           </a>
@@ -201,14 +205,14 @@ export default function Projects() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </motion.article>
               );
             })}
           </AnimatePresence>
         </motion.div>
 
         {filtered.length === 0 && (
-          <p className="text-center text-white/20 font-mono text-sm py-16">// no projects in this category</p>
+          <p className="text-center text-white/20 font-mono text-sm py-16" role="status">// no projects in this category</p>
         )}
       </div>
     </section>

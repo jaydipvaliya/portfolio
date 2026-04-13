@@ -44,14 +44,15 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 md:px-16" style={{ background: 'transparent' }}>
+    <section id="contact" className="py-24 px-6 md:px-16" style={{ background: 'transparent' }}
+      aria-label="Contact Jaydip Valiya">
       <div className="max-w-6xl mx-auto">
 
         {/* Section marker */}
         <motion.div className="flex items-center gap-4 mb-16"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">07 / Contact</span>
-          <div className="flex-1 h-px bg-white/10" />
+          <div className="flex-1 h-px bg-white/10" aria-hidden="true" />
         </motion.div>
 
         {/* Giant heading */}
@@ -83,17 +84,18 @@ export default function Contact() {
 
           {/* Left: socials */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <p className="font-mono text-xs text-white/30 tracking-widest uppercase mb-6">// Find me here</p>
-            <div className="space-y-0 border-t border-white/[0.07]">
+            <p className="font-mono text-xs text-white/30 tracking-widest uppercase mb-6" aria-hidden="true">// Find me here</p>
+            <nav className="space-y-0 border-t border-white/[0.07]" aria-label="Social media and contact links">
               {socials.map(({ icon: Icon, label, href, username }, i) => (
                 <motion.a key={label} href={href}
                   target={href.startsWith('mailto:') ? '_self' : '_blank'}
                   rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
                   initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                  className="flex items-center justify-between py-5 border-b border-white/[0.07] hover:border-white/20 group cursor-pointer transition-colors">
+                  className="flex items-center justify-between py-5 border-b border-white/[0.07] hover:border-white/20 group cursor-pointer transition-colors"
+                  aria-label={`${label}: ${username}`}>
                   <div className="flex items-center gap-4">
-                    <div className="w-8 h-8 flex items-center justify-center text-white/25 group-hover:text-white transition-colors duration-200">
+                    <div className="w-8 h-8 flex items-center justify-center text-white/25 group-hover:text-white transition-colors duration-200" aria-hidden="true">
                       <Icon size={17}/>
                     </div>
                     <div>
@@ -101,17 +103,17 @@ export default function Contact() {
                       <p className="text-white/25 text-xs font-mono mt-0.5">{username}</p>
                     </div>
                   </div>
-                  <ArrowUpRight size={15} className="text-white/15 group-hover:text-white/60 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/>
+                  <ArrowUpRight size={15} className="text-white/15 group-hover:text-white/60 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"/>
                 </motion.a>
               ))}
-            </div>
+            </nav>
           </motion.div>
 
           {/* Right: form */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
             {status === 'success' ? (
-              <div className="flex flex-col gap-4 pt-8">
-                <CheckCircle size={36} className="text-white/60"/>
+              <div className="flex flex-col gap-4 pt-8" role="status" aria-live="polite">
+                <CheckCircle size={36} className="text-white/60" aria-hidden="true"/>
                 <h3 className="text-2xl font-black text-white">Message sent!</h3>
                 <p className="text-white/40 text-sm">Thanks for reaching out. I'll get back to you soon.</p>
                 <button onClick={() => setStatus('idle')}
@@ -120,20 +122,22 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <p className="font-mono text-xs text-white/30 tracking-widest uppercase mb-8">// Drop me a message</p>
+              <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
+                <p className="font-mono text-xs text-white/30 tracking-widest uppercase mb-8" aria-hidden="true">// Drop me a message</p>
 
                 {[
-                  { name: 'name',    placeholder: 'Your name',          type: 'text',  required: true  },
-                  { name: 'email',   placeholder: 'Your email',         type: 'email', required: true  },
-                  { name: 'subject', placeholder: 'Subject (optional)', type: 'text',  required: false },
+                  { name: 'name',    placeholder: 'Your name',          type: 'text',  required: true,  autoComplete: 'name'  },
+                  { name: 'email',   placeholder: 'Your email',         type: 'email', required: true,  autoComplete: 'email' },
+                  { name: 'subject', placeholder: 'Subject (optional)', type: 'text',  required: false, autoComplete: 'off'   },
                 ].map((f, i) => (
                   <motion.div key={f.name}
                     initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                     className="border-b border-white/[0.1] focus-within:border-white/40 transition-colors">
-                    <input type={f.type} name={f.name} placeholder={f.placeholder}
+                    <label htmlFor={`contact-${f.name}`} className="sr-only">{f.placeholder}</label>
+                    <input id={`contact-${f.name}`} type={f.type} name={f.name} placeholder={f.placeholder}
                       value={form[f.name]} onChange={handleChange} required={f.required}
+                      autoComplete={f.autoComplete}
                       className="w-full bg-transparent text-white placeholder-white/20 text-sm py-3 outline-none font-light"/>
                   </motion.div>
                 ))}
@@ -141,24 +145,26 @@ export default function Contact() {
                 <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ delay: 0.3 }}
                   className="border-b border-white/[0.1] focus-within:border-white/40 transition-colors">
-                  <textarea name="message" placeholder="Your message..." rows={4}
+                  <label htmlFor="contact-message" className="sr-only">Your message</label>
+                  <textarea id="contact-message" name="message" placeholder="Your message..." rows={4}
                     value={form.message} onChange={handleChange} required
+                    autoComplete="off"
                     className="w-full bg-transparent text-white placeholder-white/20 text-sm py-3 outline-none resize-none font-light"/>
                 </motion.div>
 
                 {status === 'error' && (
-                  <div className="flex items-center gap-2 text-red-400/70 text-xs font-mono">
-                    <AlertCircle size={14}/>{errorMsg}
+                  <div className="flex items-center gap-2 text-red-400/70 text-xs font-mono" role="alert">
+                    <AlertCircle size={14} aria-hidden="true"/>{errorMsg}
                   </div>
                 )}
 
                 <button type="submit" disabled={status === 'loading'}
                   className="flex items-center gap-3 text-white font-semibold text-sm border-b border-white/30 hover:border-white pb-0.5 transition-colors disabled:opacity-40 group">
                   {status === 'loading' ? (
-                    <><div className="w-3.5 h-3.5 border border-white/50 border-t-white/80 rounded-full animate-spin"/>Sending...</>
+                    <><div className="w-3.5 h-3.5 border border-white/50 border-t-white/80 rounded-full animate-spin" aria-hidden="true"/>Sending...</>
                   ) : (
-                    <><Send size={14}/>Send message
-                      <ArrowUpRight size={13} className="opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"/>
+                    <><Send size={14} aria-hidden="true"/>Send message
+                      <ArrowUpRight size={13} className="opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true"/>
                     </>
                   )}
                 </button>

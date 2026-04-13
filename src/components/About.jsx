@@ -16,19 +16,20 @@ export default function About() {
 
   return (
     <section id="about" ref={ref} className="relative py-24 px-6 md:px-16 overflow-hidden"
-      style={{ background: 'transparent' }}>
+      style={{ background: 'transparent' }}
+      aria-label="About Jaydip Valiya">
       <div className="max-w-6xl mx-auto">
 
         {/* Section marker */}
         <motion.div className="flex items-center gap-4 mb-16"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">02 / About</span>
-          <div className="flex-1 h-px bg-white/10"/>
+          <div className="flex-1 h-px bg-white/10" aria-hidden="true"/>
         </motion.div>
 
         <div className="relative">
           {/* Giant watermark */}
-          <div className="absolute -top-6 left-0 right-0 pointer-events-none select-none overflow-hidden">
+          <div className="absolute -top-6 left-0 right-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
             <motion.p className="font-black leading-none text-white/[0.025]"
               style={{ fontSize: 'clamp(6rem, 22vw, 18rem)', letterSpacing: '-0.04em', lineHeight: 1 }}
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
@@ -70,7 +71,7 @@ export default function About() {
                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }} transition={{ delay: 0.2 + i * 0.12 }}
                     className="flex gap-4 group">
-                    <span className="font-mono text-[10px] text-white/15 group-hover:text-white/35 transition-colors shrink-0 mt-1.5 tracking-widest">{num}</span>
+                    <span className="font-mono text-[10px] text-white/15 group-hover:text-white/35 transition-colors shrink-0 mt-1.5 tracking-widest" aria-hidden="true">{num}</span>
                     <p className="text-white/50 text-base md:text-lg font-light leading-relaxed group-hover:text-white/70 transition-colors duration-300">{text}</p>
                   </motion.div>
                 ))}
@@ -102,22 +103,25 @@ export default function About() {
               transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}>
               <div className="relative overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)', aspectRatio: '3/4' }}>
                 <motion.div className="absolute inset-[-8%]" style={{ y: imgY }}>
-                  <img src="/src/assets/profile.jpg" alt="Jaydip Valiya"
+                  <img src="/src/assets/profile.jpg" alt="Jaydip Valiya — Full-Stack Developer from Gujarat, India"
+                    loading="lazy"
+                    width="340"
+                    height="453"
                     className="w-full h-full object-cover grayscale brightness-75"
                     onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}/>
                   <div className="hidden absolute inset-0 items-center justify-center" style={{ background: 'rgba(255,255,255,0.03)' }}>
-                    <span className="font-black text-6xl text-white/10">JV</span>
+                    <span className="font-black text-6xl text-white/10" aria-hidden="true">JV</span>
                   </div>
                 </motion.div>
                 <div className="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none"
-                  style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.9), transparent)' }}/>
+                  style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.9), transparent)' }} aria-hidden="true"/>
                 <div className="absolute bottom-5 left-5 right-5">
                   <p className="font-black text-white text-lg leading-tight" style={{ letterSpacing: '-0.03em' }}>Jaydip Valiya</p>
                   <p className="font-mono text-[10px] text-white/35 tracking-widest uppercase mt-1">Full-Stack Developer · Gujarat</p>
                 </div>
               </div>
               <div className="absolute -bottom-3 -right-3 inset-0 pointer-events-none -z-10"
-                style={{ border: '1px solid rgba(255,255,255,0.04)' }}/>
+                style={{ border: '1px solid rgba(255,255,255,0.04)' }} aria-hidden="true"/>
             </motion.div>
           </div>
         </div>

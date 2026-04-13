@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import FlowingLines from './components/Flowinglines';
+import ScrollToTop from './components/ScrollToTop';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -15,6 +16,7 @@ import SkillsPage from './pages/SkillsPage';
 import ProjectsPage from './pages/ProjectsPage';
 import CertificatesPage from './pages/CertificatesPage';
 import ContactPage from './pages/ContactPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -29,6 +31,7 @@ function AnimatedRoutes() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/certificates" element={<CertificatesPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AnimatePresence>
   );
@@ -50,6 +53,7 @@ function Portfolio() {
         <motion.div
           className="fixed top-0 left-0 right-0 origin-left"
           style={{ scaleX, height: '1px', background: 'rgba(255,255,255,0.18)', zIndex: 100 }}
+          aria-hidden="true"
         />
       )}
 
@@ -64,6 +68,7 @@ function Portfolio() {
           transition={{ duration: 0.4 }}
           style={{ position: 'relative', zIndex: 1 }}
         >
+          <ScrollToTop />
           <Navbar />
           <AnimatedRoutes />
           <Footer />

@@ -16,7 +16,10 @@ function Lightbox({ cert, onClose }) {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           className="fixed inset-0 z-[200] flex items-center justify-center p-4"
           style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(12px)' }}
-          onClick={onClose}>
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Certificate: ${cert.title}`}>
           <motion.div initial={{ scale: 0.88, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.88, opacity: 0 }} transition={{ type: 'spring', stiffness: 220, damping: 22 }}
             className="relative max-w-3xl w-full overflow-hidden"
@@ -31,17 +34,21 @@ function Lightbox({ cert, onClose }) {
               <div className="flex items-center gap-3">
                 <a href={cert.link} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 hover:opacity-80 transition-opacity"
-                  style={{ background: cert.accent, color: '#000' }}>
+                  style={{ background: cert.accent, color: '#000' }}
+                  aria-label={`Open ${cert.title} certificate on Unstop`}>
                   Open <ArrowUpRight size={12}/>
                 </a>
                 <button onClick={onClose}
+                  aria-label="Close certificate viewer"
                   className="w-8 h-8 flex items-center justify-center text-white/30 hover:text-white border border-white/10 hover:border-white/30 transition-all">
                   <X size={15}/>
                 </button>
               </div>
             </div>
             <div style={{ background: '#050505' }} className="flex items-center justify-center p-6">
-              <img src={cert.img} alt={cert.title} className="w-full object-contain max-h-[70vh]"
+              <img src={cert.img} alt={`${cert.title} certificate awarded by ${cert.issuer}`}
+                loading="lazy"
+                className="w-full object-contain max-h-[70vh]"
                 onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}/>
               <div className="hidden w-full h-64 items-center justify-center flex-col gap-4"
                 style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
@@ -63,13 +70,14 @@ export default function Certificates() {
   const [active, setActive] = useState(null);
 
   return (
-    <section id="certificates" className="py-24 px-6 md:px-16" style={{ background: 'transparent' }}>
+    <section id="certificates" className="py-24 px-6 md:px-16" style={{ background: 'transparent' }}
+      aria-label="Certificates and hackathon awards">
       <div className="max-w-6xl mx-auto">
 
         <motion.div className="flex items-center gap-4 mb-16"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">06 / Certificates</span>
-          <div className="flex-1 h-px bg-white/10"/>
+          <div className="flex-1 h-px bg-white/10" aria-hidden="true"/>
         </motion.div>
 
         <div className="mb-14">
@@ -91,30 +99,35 @@ export default function Certificates() {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" role="list" aria-label="Certificate cards">
           {certificates.map((cert, i) => (
-            <motion.div key={cert.title}
+            <motion.article key={cert.title}
+              role="listitem"
               initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.1, type: 'spring', stiffness: 100, damping: 18 }}
               whileHover={{ y: -6 }} onClick={() => setActive(cert)}
               className="group cursor-pointer overflow-hidden flex flex-col"
               style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)', transition: 'border-color 0.3s, box-shadow 0.3s' }}
               onMouseEnter={e => { e.currentTarget.style.borderColor=`${cert.accent}50`; e.currentTarget.style.boxShadow=`0 0 36px ${cert.accent}20`; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.07)'; e.currentTarget.style.boxShadow='none'; }}>
+              onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.07)'; e.currentTarget.style.boxShadow='none'; }}
+              aria-label={`View ${cert.title} certificate`}>
 
-              <div className="h-[2px] shrink-0"
+              <div className="h-[2px] shrink-0" aria-hidden="true"
                 style={{ background: `linear-gradient(90deg, ${cert.accent}90, ${cert.accent}20, transparent)` }}/>
 
               <div className="relative overflow-hidden shrink-0" style={{ aspectRatio: '16/10', background: '#050505' }}>
-                <img src={cert.img} alt={cert.title}
+                <img src={cert.img} alt={`${cert.title} — ${cert.type} certificate from ${cert.issuer}`}
+                  loading="lazy"
+                  width="400"
+                  height="250"
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}/>
                 <div className="hidden absolute inset-0 items-center justify-center"
                   style={{ background: `radial-gradient(circle, ${cert.accent}10, #050505)` }}>
-                  <Award size={32} style={{ color: cert.accent, opacity: 0.4 }}/>
+                  <Award size={32} style={{ color: cert.accent, opacity: 0.4 }} aria-hidden="true"/>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: 'rgba(0,0,0,0.5)' }}>
+                  style={{ background: 'rgba(0,0,0,0.5)' }} aria-hidden="true">
                   <div className="w-9 h-9 flex items-center justify-center" style={{ background: cert.accent }}>
                     <ZoomIn size={16} color="#000"/>
                   </div>
@@ -134,7 +147,7 @@ export default function Certificates() {
                 </div>
                 <p className="font-mono text-[10px] text-white/25 tracking-wide">{cert.issuer} · {cert.date}</p>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

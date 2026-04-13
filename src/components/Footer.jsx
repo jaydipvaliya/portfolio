@@ -20,36 +20,41 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="px-6 md:px-16 pb-10" style={{ background: 'transparent', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+    <footer className="px-6 md:px-16 pb-10" style={{ background: 'transparent', borderTop: '1px solid rgba(255,255,255,0.06)' }}
+      role="contentinfo">
       <div className="max-w-6xl mx-auto pt-8">
         {/* Top row: logo + nav links */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-6">
-          <Link to="/" className="font-black text-white/80 text-lg tracking-tighter hover:opacity-60 transition-opacity">
-            JV<span className="text-white/15">.</span>
+          <Link to="/" className="font-black text-white/80 text-lg tracking-tighter hover:opacity-60 transition-opacity"
+            aria-label="Jaydip Valiya — Home">
+            JV<span className="text-white/15" aria-hidden="true">.</span>
           </Link>
-          <div className="flex flex-wrap gap-4">
+          <nav className="flex flex-wrap gap-4" aria-label="Footer navigation">
             {navLinks.map(({ name, to }) => (
               <Link key={name} to={to}
                 className="font-mono text-xs tracking-widest uppercase text-white/20 hover:text-white/60 transition-colors">
                 {name}
               </Link>
             ))}
-          </div>
+          </nav>
         </div>
 
         {/* Bottom row: socials + copyright */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-          <div className="flex flex-wrap gap-6">
+          <nav className="flex flex-wrap gap-6" aria-label="Social links">
             {links.map(({ name, href }) => (
               <a key={name} href={href}
                 target={href.startsWith('mailto:') ? '_self' : '_blank'}
                 rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                className="font-mono text-xs tracking-widest uppercase text-white/25 hover:text-white/70 transition-colors">
+                className="font-mono text-xs tracking-widest uppercase text-white/25 hover:text-white/70 transition-colors"
+                aria-label={`Visit ${name}`}>
                 {name}
               </a>
             ))}
-          </div>
-          <span className="font-mono text-xs text-white/15 tracking-widest">© {new Date().getFullYear()}</span>
+          </nav>
+          <span className="font-mono text-xs text-white/15 tracking-widest">
+            © {new Date().getFullYear()} Jaydip Valiya
+          </span>
         </div>
       </div>
     </footer>

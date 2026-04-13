@@ -14,7 +14,7 @@ const tags = ['React', 'Node.js', 'MongoDB', 'Express', 'TypeScript', 'JavaScrip
 function Marquee() {
   const repeated = [...tags, ...tags, ...tags];
   return (
-    <div className="overflow-hidden py-4 border-t border-b border-white/[0.07] my-10">
+    <div className="overflow-hidden py-4 border-t border-b border-white/[0.07] my-10" aria-hidden="true">
       <motion.div className="flex gap-10 whitespace-nowrap"
         animate={{ x: ['0%', '-33.33%'] }}
         transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}>
@@ -33,21 +33,22 @@ export default function Hero() {
 
   return (
     <section id="home" className="min-h-screen flex flex-col justify-center pt-20 pb-10 px-6 md:px-16"
-      style={{ background: 'transparent' }}>
+      style={{ background: 'transparent' }}
+      aria-label="Jaydip Valiya — Full-Stack Developer introduction">
       <div className="max-w-6xl mx-auto w-full">
 
         {/* Top row */}
         <motion.div className="flex items-center justify-between mb-10"
           initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">Hi there 👋</span>
-          <div className="flex items-center gap-4">
+          <nav className="flex items-center gap-4" aria-label="Social media links">
             {socials.map(({ icon: Icon, href, label }) => (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Visit Jaydip's ${label} profile`}
                 className="text-white/25 hover:text-white transition-colors duration-200">
                 <Icon size={18}/>
               </a>
             ))}
-          </div>
+          </nav>
         </motion.div>
 
         {/* Giant name */}
@@ -60,12 +61,13 @@ export default function Hero() {
           </motion.h1>
         </div>
         <div className="overflow-hidden mb-6">
-          <motion.h1 className="font-black leading-none"
+          <motion.p className="font-black leading-none"
             style={{ fontSize: 'clamp(3.5rem, 12vw, 9rem)', letterSpacing: '-0.03em', WebkitTextStroke: '1px rgba(255,255,255,0.22)', color: 'transparent' }}
             initial={{ y: '100%' }} animate={{ y: 0 }}
-            transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}>
+            transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            aria-label="Valiya">
             Valiya.
-          </motion.h1>
+          </motion.p>
         </div>
 
         {/* Descriptor + CTAs */}
@@ -78,11 +80,13 @@ export default function Hero() {
           <div className="ml-auto flex gap-3 shrink-0">
             <button
               onClick={() => navigate('/contact')}
-              className="px-6 py-3 text-sm font-semibold text-black bg-white hover:bg-white/90 transition-colors cursor-pointer">
+              className="px-6 py-3 text-sm font-semibold text-black bg-white hover:bg-white/90 transition-colors cursor-pointer"
+              aria-label="Navigate to contact page">
               Get in Touch
             </button>
             <a href="/resume.pdf" download="Jaydip_Valiya_Resume.pdf"
-              className="px-6 py-3 text-sm font-semibold text-white border border-white/20 hover:border-white/50 transition-colors flex items-center gap-2">
+              className="px-6 py-3 text-sm font-semibold text-white border border-white/20 hover:border-white/50 transition-colors flex items-center gap-2"
+              aria-label="Download Jaydip Valiya's resume as PDF">
               <Download size={15}/> Resume
             </a>
           </div>
@@ -95,7 +99,8 @@ export default function Hero() {
 
         {/* Scroll hint */}
         <motion.div className="flex items-center gap-2 text-white/20 text-xs font-mono tracking-widest"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
+          aria-hidden="true">
           <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
             <ArrowDown size={14}/>
           </motion.div>
