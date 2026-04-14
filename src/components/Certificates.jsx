@@ -7,7 +7,7 @@ const certificates = [
   { title: "Odoo × Adani Hackathon '26",    issuer: 'Odoo/Adani',  date: '2026', link: 'https://unstop.com/certificate-preview/55383f5e-8f27-40bb-a72c-ec85870c248c', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/55383f5e-8f27-40bb-a72c-ec85870c248c.jpg', type: 'Hackathon',   accent: '#FF6B9D' },
   { title: 'K Hacks 3.0',                   issuer: 'Unstop',      date: '2026', link: 'https://unstop.com/certificate-preview/4643e5b8-f46b-424e-a344-def73d8044eb', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/4643e5b8-f46b-424e-a344-def73d8044eb.jpg', type: 'Hackathon',   accent: '#6BCB77' },
   { title: 'Online Round — Code Clash',     issuer: 'Unstop',      date: '2026', link: 'https://unstop.com/certificate-preview/010b0ef5-40f2-4674-9be3-b12dbdfffab5', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/010b0ef5-40f2-4674-9be3-b12dbdfffab5.jpg', type: 'Competition', accent: '#FFD84D' },
-  { title: 'SoloLearn C programming',     issuer: 'SoloLearn',      date: '2026', link: 'https://www.sololearn.com/certificates/CC-LGRXXPYT', img: '../src/assets/sololearn-c.png', type: 'Competition', accent: '#FFD84D' }
+  { title: 'SoloLearn C programming',     issuer: 'SoloLearn',      date: '2026', link: 'https://www.sololearn.com/certificates/CC-LGRXXPYT', img: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776188234/sololearn-c_ufbuj2.png', type: 'Competition', accent: '#FFD84D' }
 ];
 
 function Lightbox({ cert, onClose }) {

@@ -85,7 +85,7 @@ export default function About() {
               transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}>
               <div className="relative overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)', aspectRatio: '3/4' }}>
                 <motion.div className="absolute inset-[-8%]" style={{ y: imgY }}>
-                  <img src="/src/assets/profile.png" alt="Jaydip Valiya — Full-Stack Developer from Gujarat, India"
+                  <img src="https://res.cloudinary.com/dg4c3rylm/image/upload/v1776188220/profile_mytks0.png" alt="Jaydip Valiya — Full-Stack Developer from Gujarat, India"
                     loading="lazy"
                     width="340"
                     height="453"
