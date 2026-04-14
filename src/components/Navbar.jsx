@@ -45,11 +45,11 @@ export default function Navbar() {
             aria-label="Jaydip Valiya — Home">
             JV<span className="text-white/20" aria-hidden="true">.</span>
           </NavLink>
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center ">
             {navLinks.map(l => (
               <NavLink key={l.name} to={l.to}
                 className={({ isActive }) =>
-                  `font-mono text-xs tracking-widest uppercase transition-colors duration-200 ${
+                  `font-mono text-xs tracking-widest uppercase transition-colors duration-200 p-4 ${
                     isActive ? 'text-white' : 'text-white/30 hover:text-white/70'
                   }`
                 }

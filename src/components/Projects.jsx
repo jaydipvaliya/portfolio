@@ -1,219 +1,308 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Globe } from 'lucide-react';
+import { Github, ExternalLink, Globe, Youtube } from 'lucide-react';
 
 const projects = [
   {
     title: 'Ekagra App',
     desc: 'A productivity and focus app built with React and Node.js to help users manage tasks and eliminate distractions.',
     tech: ['React', 'Node.js', 'MongoDB'],
-    tags: ['React', 'Fullstack'],
     github: 'https://github.com/jaydipvaliya/Ekagra-app',
-    live: 'https://ekagra-app-zjbl.vercel.app/',
+    live: 'https://youtu.be/pI5THUR-pGQ?si=EEZYXYS2Ok-YN-2J',
+    preview: 'https://ekagra-app-zjbl.vercel.app/',
+    color: '#4CC9F0',
   },
   {
     title: 'Bentley Clone',
     desc: 'A pixel-perfect clone of the Bentley Motors website showcasing advanced CSS animations and responsive design.',
     tech: ['HTML', 'CSS', 'JavaScript'],
-    tags: ['Clone', 'CSS'],
     github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/Bentali%20clone.cg',
-    live: 'https://bentley-clone.netlify.app/',
+    live: 'https://youtu.be/edL_sEMZXbQ?si=fWYvylWvNSlJXXmC',
+    preview: 'https://bentley-clone.netlify.app/',
+    color: '#FB923C',
   },
   {
     title: 'DJI Clone',
     desc: "Frontend clone of DJI's product landing page with smooth scroll animations and interactive product showcases.",
     tech: ['HTML', 'CSS', 'JavaScript'],
-    tags: ['Clone', 'CSS'],
     github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/dji%20clone.cg',
-    live: 'https://dji-clone-project.netlify.app/',
+    live: 'https://youtu.be/dGQqi107MLU?si=2Fn0qQTs_Ocjk-YK',
+    preview: 'https://dji-clone-project.netlify.app/',
+    color: '#60A5FA',
   },
   {
     title: 'Udaan Clone',
     desc: 'Full-stack e-commerce clone inspired by Udaan B2B platform with product listings and cart management.',
     tech: ['React', 'Express', 'MongoDB'],
-    tags: ['React', 'Fullstack', 'Clone'],
     github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/udaan%20clone.cg',
-    live: 'https://udaan-clone.netlify.app/',
+    live: 'https://youtu.be/YlrkHHWErt4?si=uJcluyQjyJlq22-I',
+    preview: 'https://udaan-clone.netlify.app/',
+    color: '#A78BFA',
   },
   {
     title: 'Drop Clone',
     desc: 'Frontend clone of the Dropbox landing page with responsive layout and clean modern design.',
     tech: ['HTML', 'CSS'],
-    tags: ['Clone', 'CSS'],
     github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/drop%20clone.cg',
-    live: 'https://drop-clone.netlify.app/',
+    live: 'https://youtu.be/MmYtvzlxMsc?si=qJ88uS46DfoMDVVn',
+    preview: 'https://drop-clone.netlify.app/',
+    color: '#34D399',
   },
   {
     title: 'Memory Flip Game',
     desc: 'Classic memory card-matching game with multiple difficulty levels, score tracking, and smooth flip animations.',
     tech: ['JavaScript', 'HTML', 'CSS'],
-    tags: ['JavaScript', 'Game'],
     github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/memory%20flip%20card%20game',
     live: 'https://gamethron-memory-flip.netlify.app/',
+    preview: 'https://gamethron-memory-flip.netlify.app/',
+    color: '#4ADE80',
   },
   {
     title: 'Color Guessing Zone',
-    desc: 'Interactive color guessing game to train your eye for exact RGB values with a leaderboard and timer.',
+    desc: 'Interactive color guessing game — train your eye for exact RGB values with a leaderboard and timer.',
     tech: ['JavaScript', 'HTML', 'CSS'],
-    tags: ['JavaScript', 'Game'],
     github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/color%20guessing',
     live: 'https://gamethron-color-gassing.netlify.app/',
+    preview: 'https://gamethron-color-gassing.netlify.app/',
+    color: '#FACC15',
   },
   {
     title: 'Whack-a-Mole',
     desc: 'Browser-based whack-a-mole arcade game with increasing speed levels and high score tracking.',
     tech: ['JavaScript', 'HTML', 'CSS'],
-    tags: ['JavaScript', 'Game'],
     github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/Whack-a-Mole',
     live: 'https://gamethron-wake-a-mole.netlify.app/',
+    preview: 'https://gamethron-wake-a-mole.netlify.app/',
+    color: '#F472B6',
   },
   {
     title: 'Click Counter',
     desc: 'Minimalist click-counter web app with animated count display, reset functionality, and keyboard shortcuts.',
     tech: ['JavaScript', 'HTML', 'CSS'],
-    tags: ['JavaScript'],
     github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/clickcount',
     live: 'https://gamethron-click-count.netlify.app/',
+    preview: 'https://gamethron-click-count.netlify.app/',
+    color: '#FB923C',
   },
 ];
 
-const filters = ['All','React','Fullstack','Clone','Game','JavaScript','CSS'];
+/* ── Circular icon button ─────────────────────────────────── */
+function CircleBtn({ href, icon: Icon, color, delay }) {
+  return (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0, opacity: 0 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20, delay }}
+      whileHover={{ scale: 1.15 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={e => e.stopPropagation()}
+      className="w-11 h-11 rounded-full flex items-center justify-center shadow-lg"
+      style={{ background: color }}
+    >
+      <Icon size={18} color="#fff" />
+    </motion.a>
+  );
+}
 
-const tagAccent = { React:'#4CC9F0', Fullstack:'#A78BFA', Clone:'#FB923C', Game:'#4ADE80', JavaScript:'#FACC15', CSS:'#F472B6' };
-const getAccent = tags => tagAccent[tags[0]] || '#ffffff';
-
-export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const filtered = activeFilter === 'All' ? projects : projects.filter(p => p.tags.includes(activeFilter));
+/* ── Single project card ──────────────────────────────────── */
+function ProjectCard({ project, index }) {
+  const [hovered, setHovered] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   return (
-    <section id="projects" className="py-24 px-6 md:px-16" style={{ background: 'transparent' }}
-      aria-label="Selected projects by Jaydip Valiya">
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08, type: 'spring', stiffness: 90, damping: 18 }}
+      className="group flex flex-col overflow-hidden cursor-default"
+      style={{
+        background: 'rgba(255,255,255,0.03)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: '12px',
+        transition: 'border-color 0.3s, box-shadow 0.3s',
+      }}
+      onMouseEnter={e => {
+        setHovered(true);
+        e.currentTarget.style.borderColor = `${project.color}50`;
+        e.currentTarget.style.boxShadow = `0 8px 40px ${project.color}15`;
+      }}
+      onMouseLeave={e => {
+        setHovered(false);
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+        e.currentTarget.style.boxShadow = 'none';
+      }}
+    >
+      {/* ── Preview image area ── */}
+      <div
+        className="relative overflow-hidden"
+        style={{ aspectRatio: '16/9', background: '#050507' }}
+      >
+        {/* Live site in iframe for preview, fallback to colour bg */}
+        {!imgError ? (
+          <iframe
+            src={project.preview}
+            title={project.title}
+            className="w-full h-full border-0 pointer-events-none"
+            style={{
+              transform: 'scale(1)',
+              transformOrigin: 'top left',
+              filter: hovered ? 'brightness(0.55)' : 'brightness(0.75)',
+              transition: 'filter 0.3s',
+            }}
+            loading="lazy"
+            onError={() => setImgError(true)}
+            sandbox="allow-scripts allow-same-origin"
+          />
+        ) : (
+          /* Colour gradient fallback */
+          <div
+            className="w-full h-full flex items-center justify-center"
+            style={{
+              background: `radial-gradient(ellipse at 50% 40%, ${project.color}25 0%, #050507 70%)`,
+            }}
+          >
+            <span
+              className="font-black text-4xl"
+              style={{ color: `${project.color}40`, letterSpacing: '-0.04em' }}
+            >
+              {project.title.slice(0, 2).toUpperCase()}
+            </span>
+          </div>
+        )}
+
+        {/* Gradient overlay bottom */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-1/2 pointer-events-none"
+          style={{ background: 'linear-gradient(to top, rgba(5,5,7,0.9), transparent)' }}
+        />
+
+        {/* Floating action buttons — appear on hover */}
+        <div className="absolute inset-0 flex items-center justify-center gap-3 z-10">
+          <AnimatePresence>
+            {hovered && (
+              <>
+                <CircleBtn
+                  href={project.github}
+                  icon={Github}
+                  color="#1a1a1a"
+                  delay={0}
+                />
+                <CircleBtn
+                  href={project.preview}
+                  icon={Globe}
+                  color={project.color}
+                  delay={0.07}
+                />
+                <CircleBtn
+                  href={project.live}
+                  icon={Youtube}
+                  color="#E50914"
+                  delay={0.14}
+                />
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* ── Info below image ── */}
+      <div className="p-5 flex flex-col gap-2">
+        {/* Title */}
+        <h3
+          className="font-black text-white text-lg leading-tight"
+          style={{ color: project.color, letterSpacing: '-0.02em' }}
+        >
+          {project.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-white/50 text-sm font-light leading-relaxed line-clamp-2">
+          {project.desc}
+        </p>
+
+        {/* Tech tags */}
+        <div className="flex flex-wrap gap-2 mt-1">
+          {project.tech.map(t => (
+            <span
+              key={t}
+              className="font-mono text-xs px-2.5 py-1 rounded border"
+              style={{
+                color: 'rgba(255,255,255,0.5)',
+                borderColor: 'rgba(255,255,255,0.12)',
+                background: 'rgba(255,255,255,0.04)',
+                letterSpacing: '0.04em',
+              }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Main export ──────────────────────────────────────────── */
+export default function Projects() {
+  return (
+    <section id="projects" className="py-24 px-6 md:px-16">
       <div className="max-w-6xl mx-auto">
 
-        <motion.div className="flex items-center gap-4 mb-16"
-          initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+        {/* Section marker */}
+        <motion.div
+          className="flex items-center gap-4 mb-16"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
           <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">05 / Projects</span>
-          <div className="flex-1 h-px bg-white/10" aria-hidden="true"/>
+          <div className="flex-1 h-px bg-white/10" />
         </motion.div>
 
-        <div className="mb-12">
+        {/* Title */}
+        <div className="mb-14">
           <div className="overflow-hidden">
-            <motion.h2 className="font-black text-white leading-none"
+            <motion.h2
+              className="font-black text-white leading-none"
               style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}
               initial={{ y: '100%' }} whileInView={{ y: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}>
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            >
               SELECTED
             </motion.h2>
           </div>
           <div className="overflow-hidden">
-            <motion.h2 className="font-black leading-none"
-              style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em', WebkitTextStroke: '1px rgba(255,255,255,0.2)', color: 'transparent' }}
+            <motion.h2
+              className="font-black leading-none"
+              style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em', WebkitTextStroke: '3px rgba(255,255,255,0.2)', color: 'transparent' }}
               initial={{ y: '100%' }} whileInView={{ y: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.65, delay: 0.07, ease: [0.16, 1, 0.3, 1] }}>
+              transition={{ duration: 0.65, delay: 0.07, ease: [0.16, 1, 0.3, 1] }}
+            >
               WORK.
             </motion.h2>
           </div>
         </div>
 
-        {/* Filters */}
-        <nav className="flex flex-wrap gap-2.5 mb-12" aria-label="Project category filters">
-          {filters.map(f => (
-            <button key={f} onClick={() => setActiveFilter(f)}
-              aria-pressed={activeFilter === f}
-              className={`font-mono text-xs tracking-widest uppercase px-4 py-2 border transition-all duration-200 ${
-                activeFilter === f ? 'text-white border-white/40 bg-white/[0.06]' : 'text-white/25 border-white/[0.07] hover:text-white/60 hover:border-white/20'
-              }`}>
-              {f}
-            </button>
+        {/* Card grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.title} project={project} index={i} />
           ))}
-        </nav>
+        </div>
 
-        {/* Cards */}
-        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" role="list">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((p, i) => {
-              const accent = getAccent(p.tags);
-              return (
-                <motion.article key={p.title} layout
-                  role="listitem"
-                  initial={{ opacity: 0, y: 24, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ delay: i * 0.05, type: 'spring', stiffness: 120, damping: 18 }}
-                  whileHover={{ y: -6 }}
-                  className="group relative flex flex-col overflow-hidden cursor-default"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', transition: 'border-color 0.3s, box-shadow 0.3s' }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor=`${accent}50`; e.currentTarget.style.boxShadow=`0 0 40px ${accent}18`; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.07)'; e.currentTarget.style.boxShadow='none'; }}>
-
-                  <div className="h-[2px] w-full shrink-0" aria-hidden="true"
-                    style={{ background: `linear-gradient(90deg, ${accent}90, ${accent}20, transparent)` }}/>
-
-                  <span className="absolute top-4 right-4 font-mono text-[11px] text-white/10 group-hover:text-white/25 transition-colors select-none" aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-
-                  <div className="flex flex-col flex-1 p-5 pt-4">
-                    <div className="flex items-start justify-between gap-3 mb-3">
-                      <h3 className="font-black text-white/75 group-hover:text-white transition-colors text-base leading-snug" style={{ letterSpacing: '-0.02em' }}>
-                        {p.title}
-                      </h3>
-                      <div className="flex items-center gap-2 shrink-0 mt-0.5">
-                        {p.live && (
-                          <a href={p.live} target="_blank" rel="noopener noreferrer"
-                            className="text-white/20 hover:text-white transition-colors"
-                            aria-label={`Live demo of ${p.title}`}
-                            onClick={e => e.stopPropagation()}>
-                            <Globe size={15}/>
-                          </a>
-                        )}
-                        {p.github && (
-                          <a href={p.github} target="_blank" rel="noopener noreferrer"
-                            className="text-white/20 hover:text-white transition-colors"
-                            aria-label={`GitHub repository for ${p.title}`}
-                            onClick={e => e.stopPropagation()}>
-                            <ArrowUpRight size={16}/>
-                          </a>
-                        )}
-                      </div>
-                    </div>
-
-                    <p className="text-white/35 text-sm font-light leading-relaxed flex-1 group-hover:text-white/55 transition-colors">
-                      {p.desc}
-                    </p>
-
-                    <div className="mt-5 pt-4 border-t border-white/[0.06]">
-                      <div className="flex flex-wrap gap-1.5 mb-2.5">
-                        {p.tags.map(t => (
-                          <span key={t} className="font-mono text-[10px] tracking-widest uppercase px-2 py-0.5 border"
-                            style={{ color:`${tagAccent[t]||'#fff'}90`, borderColor:`${tagAccent[t]||'#fff'}25`, background:`${tagAccent[t]||'#fff'}08` }}>
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <p className="font-mono text-[11px] text-white/15 tracking-wide">{p.tech.join(' · ')}</p>
-                        {p.live && (
-                          <a href={p.live} target="_blank" rel="noopener noreferrer"
-                            className="font-mono text-[10px] tracking-widest uppercase text-white/25 hover:text-white/70 border border-white/[0.07] hover:border-white/25 px-2 py-1 transition-all flex items-center gap-1"
-                            aria-label={`View live demo of ${p.title}`}
-                            onClick={e => e.stopPropagation()}>
-                            <Globe size={10}/> Live
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </motion.article>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
-
-        {filtered.length === 0 && (
-          <p className="text-center text-white/20 font-mono text-sm py-16" role="status">// no projects in this category</p>
-        )}
+        {/* Bottom count */}
+        <motion.p
+          className="mt-12 font-mono text-xs text-white/15 tracking-widest"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+        >
+          // {projects.length} projects · hover a card to see links
+        </motion.p>
       </div>
     </section>
   );

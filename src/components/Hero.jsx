@@ -40,12 +40,12 @@ export default function Hero() {
         {/* Top row */}
         <motion.div className="flex items-center justify-between mb-10"
           initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">Hi there 👋</span>
+          <span className="font-mono text-xl tracking-[0.3em] text-white/30 uppercase">Hi there 👋</span>
           <nav className="flex items-center gap-4" aria-label="Social media links">
             {socials.map(({ icon: Icon, href, label }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Visit Jaydip's ${label} profile`}
                 className="text-white/25 hover:text-white transition-colors duration-200">
-                <Icon size={18}/>
+                <Icon size={25}/>
               </a>
             ))}
           </nav>
@@ -62,7 +62,7 @@ export default function Hero() {
         </div>
         <div className="overflow-hidden mb-6">
           <motion.p className="font-black leading-none"
-            style={{ fontSize: 'clamp(3.5rem, 12vw, 9rem)', letterSpacing: '-0.03em', WebkitTextStroke: '1px rgba(255,255,255,0.22)', color: 'transparent' }}
+            style={{ fontSize: 'clamp(3.5rem, 12vw, 9rem)', letterSpacing: '-0.03em', WebkitTextStroke: '3px rgba(255,255,255,0.22)', color: 'transparent' }}
             initial={{ y: '100%' }} animate={{ y: 0 }}
             transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             aria-label="Valiya">

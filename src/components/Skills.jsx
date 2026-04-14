@@ -72,7 +72,7 @@ export default function Skills() {
           </div>
           <div className="overflow-hidden">
             <motion.h2 className="font-black leading-none"
-              style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em', WebkitTextStroke: '1px rgba(255,255,255,0.2)', color: 'transparent' }}
+              style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em', WebkitTextStroke: '3px rgba(255,255,255,0.2)', color: 'transparent' }}
               initial={{ y: '100%' }} whileInView={{ y: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.65, delay: 0.07, ease: [0.16, 1, 0.3, 1] }}>
               TECHNOLOGIES.

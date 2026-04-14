@@ -2,9 +2,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 const stats = [
-  { num: '2+',  label: 'Years coding'  },
+  { num: '2+', label: 'Years coding' },
   { num: '10+', label: 'Projects built' },
-  { num: '4+',  label: 'Hackathons'    },
+  { num: '4+', label: 'Hackathons' },
 ];
 
 const tags = ['MERN Stack', 'B.Tech CSE', 'Gujarat', 'Full-Stack', 'Open to Work'];
@@ -24,42 +24,24 @@ export default function About() {
         <motion.div className="flex items-center gap-4 mb-16"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">02 / About</span>
-          <div className="flex-1 h-px bg-white/10" aria-hidden="true"/>
+          <div className="flex-1 h-px bg-white/10" aria-hidden="true" />
         </motion.div>
 
         <div className="relative">
-          {/* Giant watermark */}
-          <div className="absolute -top-6 left-0 right-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
-            <motion.p className="font-black leading-none text-white/[0.025]"
-              style={{ fontSize: 'clamp(6rem, 22vw, 18rem)', letterSpacing: '-0.04em', lineHeight: 1 }}
-              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-              transition={{ duration: 1 }}>
-              ABOUT
-            </motion.p>
-          </div>
 
+          <div className="overflow-hidden">
+            <motion.h2 className="font-black text-white leading-none"
+              style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}
+              initial={{ y: '100%' }} whileInView={{ y: 0 }} viewport={{ once: true }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}>
+               ABOUT ME 
+            </motion.h2>
+          </div>
+          
+          <br />
           <div className="relative grid md:grid-cols-[1fr_340px] gap-12 md:gap-16 items-start">
 
-            {/* Left */}
             <div>
-              <div className="mb-10">
-                <div className="overflow-hidden">
-                  <motion.h2 className="font-black text-white leading-[0.9]"
-                    style={{ fontSize: 'clamp(3rem, 9vw, 7rem)', letterSpacing: '-0.04em' }}
-                    initial={{ y: '105%' }} whileInView={{ y: 0 }} viewport={{ once: true }}
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-                    Who
-                  </motion.h2>
-                </div>
-                <div className="overflow-hidden">
-                  <motion.h2 className="font-black leading-[0.9]"
-                    style={{ fontSize: 'clamp(3rem, 9vw, 7rem)', letterSpacing: '-0.04em', WebkitTextStroke: '1.5px rgba(255,255,255,0.25)', color: 'transparent' }}
-                    initial={{ y: '105%' }} whileInView={{ y: 0 }} viewport={{ once: true }}
-                    transition={{ duration: 0.7, delay: 0.07, ease: [0.16, 1, 0.3, 1] }}>
-                    Am I?
-                  </motion.h2>
-                </div>
-              </div>
 
               <div className="space-y-6 max-w-xl">
                 {[
@@ -103,25 +85,25 @@ export default function About() {
               transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}>
               <div className="relative overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)', aspectRatio: '3/4' }}>
                 <motion.div className="absolute inset-[-8%]" style={{ y: imgY }}>
-                  <img src="/src/assets/profile.jpg" alt="Jaydip Valiya — Full-Stack Developer from Gujarat, India"
+                  <img src="/src/assets/profile.png" alt="Jaydip Valiya — Full-Stack Developer from Gujarat, India"
                     loading="lazy"
                     width="340"
                     height="453"
                     className="w-full h-full object-cover grayscale brightness-75"
-                    onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}/>
+                    onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                   <div className="hidden absolute inset-0 items-center justify-center" style={{ background: 'rgba(255,255,255,0.03)' }}>
                     <span className="font-black text-6xl text-white/10" aria-hidden="true">JV</span>
                   </div>
                 </motion.div>
                 <div className="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none"
-                  style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.9), transparent)' }} aria-hidden="true"/>
+                  style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.9), transparent)' }} aria-hidden="true" />
                 <div className="absolute bottom-5 left-5 right-5">
                   <p className="font-black text-white text-lg leading-tight" style={{ letterSpacing: '-0.03em' }}>Jaydip Valiya</p>
                   <p className="font-mono text-[10px] text-white/35 tracking-widest uppercase mt-1">Full-Stack Developer · Gujarat</p>
                 </div>
               </div>
               <div className="absolute -bottom-3 -right-3 inset-0 pointer-events-none -z-10"
-                style={{ border: '1px solid rgba(255,255,255,0.04)' }} aria-hidden="true"/>
+                style={{ border: '1px solid rgba(255,255,255,0.04)' }} aria-hidden="true" />
             </motion.div>
           </div>
         </div>
