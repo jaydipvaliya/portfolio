@@ -83,7 +83,7 @@ export default function Certificates() {
 
         <motion.div className="flex items-center gap-4 mb-16"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-          <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">06 / Certificates</span>
+          <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">07 / Certificates</span>
           <div className="flex-1 h-px bg-white/10" aria-hidden="true"/>
         </motion.div>
 
@@ -106,14 +106,14 @@ export default function Certificates() {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" role="list" aria-label="Certificate cards">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" role="list" aria-label="Certificate cards">
           {certificates.map((cert, i) => (
             <motion.article key={cert.title}
               role="listitem"
               initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.1, type: 'spring', stiffness: 100, damping: 18 }}
               whileHover={{ y: -6 }} onClick={() => setActive(cert)}
-              className="group cursor-pointer overflow-hidden flex flex-col"
+              className="group cursor-pointer overflow-hidden flex flex-col rounded-xl"
               style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)', transition: 'border-color 0.3s, box-shadow 0.3s' }}
               onMouseEnter={e => { e.currentTarget.style.borderColor=`${cert.accent}50`; e.currentTarget.style.boxShadow=`0 0 36px ${cert.accent}20`; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.07)'; e.currentTarget.style.boxShadow='none'; }}

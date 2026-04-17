@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, Twitter, Send, CheckCircle, AlertCircle, ArrowUpRight } from 'lucide-react';
+import { Mail, Github, Linkedin, Twitter, Code2, Send, CheckCircle, AlertCircle, ArrowUpRight } from 'lucide-react';
 
 const socials = [
   { icon: Github,   label: 'GitHub',      href: 'https://github.com/jaydipvaliya',                      username: '@jaydipvaliya'              },
   { icon: Linkedin, label: 'LinkedIn',    href: 'https://www.linkedin.com/in/jaydip-valiya-a1009737b/', username: 'Jaydip Valiya'              },
   { icon: Twitter,  label: 'Twitter / X', href: 'https://x.com/JaydipValiya024',                        username: '@JaydipValiya024'            },
+  { icon: Code2,    label: 'LeetCode',    href: 'https://leetcode.com/u/jaydip_valiya/',                username: '@jaydip_valiya'             },
   { icon: Mail,     label: 'Email',       href: 'mailto:jaydip.valiya.cg@gmail.com',                    username: 'jaydip.valiya.cg@gmail.com' },
 ];
 
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+import emailjs from '@emailjs/browser';
+
+const EMAILJS_SERVICE_ID  = 'service_vl263d2';
+const EMAILJS_TEMPLATE_ID = 'template_mn03esb';
+const EMAILJS_PUBLIC_KEY  = 'oOhBRDc7dg4Nv6FbR';
 
 export default function Contact() {
   const [form, setForm]     = useState({ name: '', email: '', subject: '', message: '' });
@@ -25,19 +28,22 @@ export default function Contact() {
     if (!form.name || !form.email || !form.message) return;
     setStatus('loading'); setErrorMsg('');
     try {
-      const emailjs = await import('@emailjs/browser').catch(() => null);
-      if (!emailjs || EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID') {
-        await new Promise(r => setTimeout(r, 1000));
-        setStatus('success');
-        setForm({ name: '', email: '', subject: '', message: '' });
-        return;
-      }
-      await emailjs.default.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID,
-        { from_name: form.name, from_email: form.email, subject: form.subject || 'Portfolio contact', message: form.message },
-        EMAILJS_PUBLIC_KEY);
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name: form.name,
+        from_name: form.name,
+        user_name: form.name,
+        sender_name: form.name,
+        email: form.email,
+        from_email: form.email,
+        user_email: form.email,
+        sender_email: form.email,
+        reply_to: form.email,
+        subject: form.subject || 'Portfolio Contact',
+        message: form.message,
+      }, EMAILJS_PUBLIC_KEY);
       setStatus('success');
       setForm({ name: '', email: '', subject: '', message: '' });
-    } catch {
+    } catch (err) {
       setStatus('error');
       setErrorMsg('Something went wrong. Please email me directly.');
     }
@@ -51,7 +57,7 @@ export default function Contact() {
         {/* Section marker */}
         <motion.div className="flex items-center gap-4 mb-16"
           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-          <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">07 / Contact</span>
+          <span className="font-mono text-xs tracking-[0.3em] text-white/30 uppercase">08 / Contact</span>
           <div className="flex-1 h-px bg-white/10" aria-hidden="true" />
         </motion.div>
 
@@ -85,25 +91,30 @@ export default function Contact() {
           {/* Left: socials */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p className="font-mono text-xs text-white/30 tracking-widest uppercase mb-6" aria-hidden="true">// Find me here</p>
-            <nav className="space-y-0 border-t border-white/[0.07]" aria-label="Social media and contact links">
+            <nav className="grid grid-cols-2 gap-4" aria-label="Social media and contact links">
               {socials.map(({ icon: Icon, label, href, username }, i) => (
                 <motion.a key={label} href={href}
                   target={href.startsWith('mailto:') ? '_self' : '_blank'}
                   rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                  initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                  className="flex items-center justify-between py-5 border-b border-white/[0.07] hover:border-white/20 group cursor-pointer transition-colors"
+                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ delay: i * 0.06 }}
+                  className="group relative block p-5 overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
                   aria-label={`${label}: ${username}`}>
-                  <div className="flex items-center gap-4">
-                    <div className="w-8 h-8 flex items-center justify-center text-white/25 group-hover:text-white transition-colors duration-200" aria-hidden="true">
-                      <Icon size={17}/>
+                  {/* Hover glow */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.04), transparent 70%)' }} />
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="w-10 h-10 flex items-center justify-center rounded-lg transition-transform duration-300 group-hover:scale-110"
+                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                        <Icon size={20} className="text-white/40 group-hover:text-white transition-colors duration-300" />
+                      </div>
+                      <ArrowUpRight size={16} className="text-white/10 group-hover:text-white/50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"/>
                     </div>
-                    <div>
-                      <p className="text-white/70 font-semibold text-sm group-hover:text-white transition-colors duration-200">{label}</p>
-                      <p className="text-white/25 text-xs font-mono mt-0.5">{username}</p>
-                    </div>
+                    <p className="text-white/70 font-semibold text-sm group-hover:text-white transition-colors duration-200">{label}</p>
+                    <p className="text-white/25 text-[11px] font-mono mt-1 truncate">{username}</p>
                   </div>
-                  <ArrowUpRight size={15} className="text-white/15 group-hover:text-white/60 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"/>
                 </motion.a>
               ))}
             </nav>

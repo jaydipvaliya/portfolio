@@ -14,6 +14,7 @@ import AboutPage from './pages/AboutPage';
 import JourneyPage from './pages/JourneyPage';
 import SkillsPage from './pages/SkillsPage';
 import ProjectsPage from './pages/ProjectsPage';
+import HackathonsPage from './pages/HackathonsPage';
 import CertificatesPage from './pages/CertificatesPage';
 import ContactPage from './pages/ContactPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -29,6 +30,7 @@ function AnimatedRoutes() {
         <Route path="/journey" element={<JourneyPage />} />
         <Route path="/skills" element={<SkillsPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/hackathons" element={<HackathonsPage />} />
         <Route path="/certificates" element={<CertificatesPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<NotFoundPage />} />
