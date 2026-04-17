@@ -5,6 +5,7 @@ import Journey from '../components/Journey';
 import Skills from '../components/Skills';
 import Projects from '../components/Projects';
 import Certificates from '../components/Certificates';
+import Resume from '../components/Resume';
 import Contact from '../components/Contact';
 
 export default function HomePage() {
@@ -38,6 +39,7 @@ export default function HomePage() {
       <Skills />
       <Projects />
       <Certificates />
+      <Resume />
       <Contact />
     </main>
   );

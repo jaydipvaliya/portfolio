@@ -3,13 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Award, X, ZoomIn, ArrowUpRight } from 'lucide-react';
 
 const certificates = [
-  { title: 'Jaipur Cybrathon 2025',         issuer: 'Unstop',      date: '2025', link: 'https://unstop.com/certificate-preview/05422511-0d9c-4c0f-b4d5-848562687297', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/05422511-0d9c-4c0f-b4d5-848562687297.jpg', type: 'Hackathon',   accent: '#4CC9F0' },
-  { title: "Odoo × Adani Hackathon '26",    issuer: 'Odoo/Adani',  date: '2026', link: 'https://unstop.com/certificate-preview/55383f5e-8f27-40bb-a72c-ec85870c248c', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/55383f5e-8f27-40bb-a72c-ec85870c248c.jpg', type: 'Hackathon',   accent: '#FF6B9D' },
-  { title: 'K Hacks 3.0',                   issuer: 'Unstop',      date: '2026', link: 'https://unstop.com/certificate-preview/4643e5b8-f46b-424e-a344-def73d8044eb', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/4643e5b8-f46b-424e-a344-def73d8044eb.jpg', type: 'Hackathon',   accent: '#6BCB77' },
-  { title: 'Online Round — Code Clash',     issuer: 'Unstop',      date: '2026', link: 'https://unstop.com/certificate-preview/010b0ef5-40f2-4674-9be3-b12dbdfffab5', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/010b0ef5-40f2-4674-9be3-b12dbdfffab5.jpg', type: 'Competition', accent: '#FFD84D' },
-  { title: 'SoloLearn C programming',     issuer: 'SoloLearn',      date: '2026', link: 'https://www.sololearn.com/certificates/CC-LGRXXPYT', img: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776188234/sololearn-c_ufbuj2.png', type: 'Competition', accent: '#FFD84D' },
-  { title: 'Build & Submit-Prototype Development Round',     issuer: 'Unstop',      date: '2026', link: 'https://unstop.com/certificate-preview/d43ebbaf-ee01-477d-bf82-4e256416c126', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/d43ebbaf-ee01-477d-bf82-4e256416c126.jpg', type: 'Hackathon', accent: '#4CC9F0' }
-
+  { title: 'Jaipur Cybrathon 2025',         issuer: 'Unstop',      date: '2025', link: 'https://unstop.com/certificate-preview/05422511-0d9c-4c0f-b4d5-848562687297', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/05422511-0d9c-4c0f-b4d5-848562687297.jpg', type: 'Hackathon',   accent: '#4CC9F0', description: 'Developed a robust cybersecurity monitoring dashboard (SENTINEL) with real-time threat detection and role-based access control.' },
+  { title: "Odoo × Adani Hackathon '26",    issuer: 'Odoo/Adani',  date: '2026', link: 'https://unstop.com/certificate-preview/55383f5e-8f27-40bb-a72c-ec85870c248c', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/55383f5e-8f27-40bb-a72c-ec85870c248c.jpg', type: 'Hackathon',   accent: '#FF6B9D', description: 'Collaborated in a high-stakes environment to build innovative business solutions, focusing on streamlined workflows and scalable design.' },
+  { title: 'K Hacks 3.0',                   issuer: 'Unstop',      date: '2026', link: 'https://unstop.com/certificate-preview/4643e5b8-f46b-424e-a344-def73d8044eb', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/4643e5b8-f46b-424e-a344-def73d8044eb.jpg', type: 'Hackathon',   accent: '#6BCB77', description: 'Built an interactive MVP addressing complex problem statements within a strict 48-hour deadline, demonstrating rapid prototyping skills.' },
+  { title: 'Online Round — Code Clash',     issuer: 'Unstop',      date: '2026', link: 'https://unstop.com/certificate-preview/010b0ef5-40f2-4674-9be3-b12dbdfffab5', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/010b0ef5-40f2-4674-9be3-b12dbdfffab5.jpg', type: 'Competition', accent: '#FFD84D', description: 'Showcased problem-solving speed and algorithmic thinking in a competitive programming contest against hundreds of participants.' },
+  { title: 'SoloLearn C programming',     issuer: 'SoloLearn',      date: '2026', link: 'https://www.sololearn.com/certificates/CC-LGRXXPYT', img: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776188234/sololearn-c_ufbuj2.png', type: 'Course', accent: '#FFD84D', description: 'Mastered core programming fundamentals including pointers, memory management, and data structures through rigorous practical exercises.' },
+  { title: 'Build & Submit-Prototype Development Round',     issuer: 'Unstop',      date: '2026', link: 'https://unstop.com/certificate-preview/d43ebbaf-ee01-477d-bf82-4e256416c126', img: 'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/d43ebbaf-ee01-477d-bf82-4e256416c126.jpg', type: 'Hackathon', accent: '#4CC9F0', description: 'Successfully translated complex requirements into an intuitive and functional frontend prototype during a high-paced development sprint.' }
 ];
 
 function Lightbox({ cert, onClose }) {
@@ -48,6 +47,11 @@ function Lightbox({ cert, onClose }) {
                 </button>
               </div>
             </div>
+            {cert.description && (
+              <div className="px-5 py-3 border-b border-white/5" style={{ background: 'rgba(255,255,255,0.02)' }}>
+                <p className="text-sm text-white/70 leading-relaxed font-mono">{cert.description}</p>
+              </div>
+            )}
             <div style={{ background: '#050505' }} className="flex items-center justify-center p-6">
               <img src={cert.img} alt={`${cert.title} certificate awarded by ${cert.issuer}`}
                 loading="lazy"
@@ -148,7 +152,14 @@ export default function Certificates() {
                     {cert.type}
                   </span>
                 </div>
-                <p className="font-mono text-[10px] text-white/25 tracking-wide">{cert.issuer} · {cert.date}</p>
+                <div className="flex flex-col gap-1.5 mt-auto pt-1">
+                  {cert.description && (
+                    <p className="font-mono text-[11px] text-white/50 leading-relaxed line-clamp-2">
+                      {cert.description}
+                    </p>
+                  )}
+                  <p className="font-mono text-[10px] text-white/25 tracking-wide">{cert.issuer} · {cert.date}</p>
+                </div>
               </div>
             </motion.article>
           ))}

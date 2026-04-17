@@ -420,6 +420,8 @@ function FigmaLightbox({ design, onClose }) {
 export default function Projects() {
   const [active, setActive]   = useState('All');
   const [figmaOpen, setFigmaOpen] = useState(null);
+  const [showAllProj, setShowAllProj] = useState(false);
+  const [showAllFigma, setShowAllFigma] = useState(false);
 
   const filtered = active === 'All'
     ? projects
@@ -428,6 +430,9 @@ export default function Projects() {
     : projects.filter(p => p.category === active);
 
   const showFigma = active === 'All' || active === 'Figma';
+
+  const displayedProjects = showAllProj ? filtered : filtered.slice(0, 3);
+  const displayedFigma = showAllFigma ? figmaDesigns : figmaDesigns.slice(0, 3);
 
   return (
     <section id="projects" className="py-24 px-6 md:px-16">
@@ -464,7 +469,7 @@ export default function Projects() {
         <motion.div className="flex flex-wrap gap-2.5 mb-12"
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: .2 }}>
           {CATEGORIES.map(cat => (
-            <button key={cat} onClick={() => setActive(cat)}
+            <button key={cat} onClick={() => { setActive(cat); setShowAllProj(false); setShowAllFigma(false); }}
               className="font-mono text-xs tracking-widest uppercase px-4 py-2 transition-all duration-200"
               style={{
                 border: `1px solid ${active === cat ? `${CAT_COLORS[cat]}70` : 'rgba(255,255,255,0.08)'}`,
@@ -478,19 +483,34 @@ export default function Projects() {
         </motion.div>
 
         {/* Project cards */}
-        <AnimatePresence mode="wait">
-          {filtered.length > 0 && (
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {filtered.map((p, i) => (
-                <ProjectCard key={p.title} project={p} index={i} />
-              ))}
-            </motion.div>
+        <div className="mb-12">
+          <AnimatePresence mode="wait">
+            {displayedProjects.length > 0 && (
+              <motion.div
+                key={active + (showAllProj ? '-all' : '-some')}
+                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3 }}
+                className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {displayedProjects.map((p, i) => (
+                  <ProjectCard key={p.title} project={p} index={i} />
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {filtered.length > 3 && (
+            <div className="flex justify-center mt-8">
+              <button onClick={() => setShowAllProj(!showAllProj)}
+                className="font-mono text-xs tracking-widest uppercase px-6 py-3 transition-all duration-300 hover:scale-105 hover:bg-white/5"
+                style={{
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  color: 'rgba(255,255,255,0.7)',
+                  borderRadius: '8px',
+                }}>
+                {showAllProj ? 'View Less' : 'View More'}
+              </button>
+            </div>
           )}
-        </AnimatePresence>
+        </div>
 
         {/* Figma section */}
         <AnimatePresence>
@@ -509,11 +529,24 @@ export default function Projects() {
               </div>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {figmaDesigns.map((d, i) => (
+                {displayedFigma.map((d, i) => (
                   <FigmaCard key={d.title} design={d} index={i}
                     onClick={() => setFigmaOpen(d)} />
                 ))}
               </div>
+              {figmaDesigns.length > 3 && (
+                <div className="flex justify-center mt-8">
+                  <button onClick={() => setShowAllFigma(!showAllFigma)}
+                    className="font-mono text-xs tracking-widest uppercase px-6 py-3 transition-all duration-300 hover:scale-105 hover:bg-white/5"
+                    style={{
+                      border: '1px solid rgba(255,255,255,0.15)',
+                      color: 'rgba(255,255,255,0.7)',
+                      borderRadius: '8px',
+                    }}>
+                    {showAllFigma ? 'View Less' : 'View More'}
+                  </button>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

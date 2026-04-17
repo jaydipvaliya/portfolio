@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 import { GraduationCap, BookOpen, School } from 'lucide-react';
 
 const milestones = [
-  { year: '2022–2023', title: 'Secondary School',          institution: 'Nutan Vidhyapith',      location: 'Gujarat, India', description: 'Completed secondary education. Foundation of my academic journey and early interest in computers.',                                                                icon: School,       current: false },
-  { year: '2024–2025', title: 'Higher Secondary',          institution: 'Nutan Vidhyapith',      location: 'Gujarat, India', description: 'Specialized in Science and Mathematics. Developed strong analytical thinking and problem-solving skills.',                                                       icon: BookOpen,     current: false },
   { year: '2025–2029', title: 'B.Tech in Computer Science', institution: 'Swaminarayan University', location: 'Gujarat, India', description: 'Currently pursuing B.Tech with a focus on full-stack development, data structures, and software engineering.', icon: GraduationCap, current: true  },
+  { year: '2024–2025', title: 'Higher Secondary',          institution: 'Nutan Vidhyapith',      location: 'Gujarat, India', description: 'Specialized in Science and Mathematics. Developed strong analytical thinking and problem-solving skills.',                                                       icon: BookOpen,     current: false },
+  { year: '2022–2023', title: 'Secondary School',          institution: 'Nutan Vidhyapith',      location: 'Gujarat, India', description: 'Completed secondary education. Foundation of my academic journey and early interest in computers.',                                                                icon: School,       current: false },
 ];
 
 export default function Journey() {

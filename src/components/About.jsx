@@ -34,10 +34,18 @@ export default function About() {
               style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}
               initial={{ y: '100%' }} whileInView={{ y: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}>
-               ABOUT ME 
+              ABOUT 
             </motion.h2>
           </div>
-          
+          <div className="overflow-hidden">
+            <motion.h2 className="font-black leading-none"
+              style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em', WebkitTextStroke: '3px rgba(255,255,255,0.2)', color: 'transparent' }}
+              initial={{ y: '100%' }} whileInView={{ y: 0 }} viewport={{ once: true }}
+              transition={{ duration: 0.65, delay: 0.07, ease: [0.16, 1, 0.3, 1] }}>
+              ME
+            </motion.h2>
+          </div>
+
           <br />
           <div className="relative grid md:grid-cols-[1fr_340px] gap-12 md:gap-16 items-start">
 
@@ -84,12 +92,12 @@ export default function About() {
               initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}>
               <div className="relative overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)', aspectRatio: '3/4' }}>
-                <motion.div className="absolute inset-[-8%]" style={{ y: imgY }}>
+                <motion.div className="absolute inset-0" style={{ y: imgY }}>
                   <img src="https://res.cloudinary.com/dg4c3rylm/image/upload/v1776188220/profile_mytks0.png" alt="Jaydip Valiya — Full-Stack Developer from Gujarat, India"
                     loading="lazy"
                     width="340"
                     height="453"
-                    className="w-full h-full object-cover grayscale brightness-75"
+                    className="w-full h-full object-cover object-center grayscale brightness-75"
                     onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
                   <div className="hidden absolute inset-0 items-center justify-center" style={{ background: 'rgba(255,255,255,0.03)' }}>
                     <span className="font-black text-6xl text-white/10" aria-hidden="true">JV</span>

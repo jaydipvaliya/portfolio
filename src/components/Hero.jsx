@@ -84,11 +84,12 @@ export default function Hero() {
               aria-label="Navigate to contact page">
               Get in Touch
             </button>
-            <a href="/resume.pdf" download="Jaydip_Valiya_Resume.pdf"
-              className="px-6 py-3 text-sm font-semibold text-white border border-white/20 hover:border-white/50 transition-colors flex items-center gap-2"
-              aria-label="Download Jaydip Valiya's resume as PDF">
-              <Download size={15}/> Resume
-            </a>
+            <button
+              onClick={() => document.getElementById('resume')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-6 py-3 text-sm font-semibold text-white border border-white/20 hover:border-white/50 transition-colors flex items-center gap-2 cursor-pointer"
+              aria-label="Scroll down to Resume section">
+              View Resume
+            </button>
           </div>
         </motion.div>
 
