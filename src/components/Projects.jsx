@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Youtube, Globe, X, ExternalLink } from 'lucide-react';
-import { title } from 'framer-motion/client';
 
 /* ─── Project Data ─────────────────────────────────────────── */
 const projects = [
@@ -14,7 +13,7 @@ const projects = [
     github: 'https://github.com/jaydipvaliya/Ekagra-app',
     youtube: 'https://youtu.be/pI5THUR-pGQ?si=EEZYXYS2Ok-YN-2J',
     live: 'https://ekagra-app-zjbl.vercel.app/',
-    image: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776339181/Ekagra_app_jdyyn4.png',
+    image: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_600,q_auto,f_auto/v1776339181/Ekagra_app_jdyyn4.png',
     color: '#4CC9F0',
   },
   {
@@ -59,7 +58,7 @@ const projects = [
     github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/drop%20clone.cg',
     youtube: 'https://youtu.be/MmYtvzlxMsc?si=qJ88uS46DfoMDVVn',
     live: 'https://drop-clone.netlify.app/',
-    image: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776339497/drop_clone_objrhc.png',
+    image: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_600,q_auto,f_auto/v1776339497/drop_clone_objrhc.png',
     color: '#34D399',
   },
   // ── Games
@@ -119,7 +118,7 @@ const figmaDesigns = [
     tags: ['UI/UX', 'Web'],
     color: '#A259FF',
     embed: 'https://embed.figma.com/design/e5HhR7TYnWsvpKJBo1MKde/Untitled?node-id=4-2&embed-host=share',
-    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776340242/Slice_12_hirecy.png',
+    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_500,q_auto,f_auto/v1776340242/Slice_12_hirecy.png',
   },
   {
     title: 'Explore Page UI',
@@ -127,7 +126,7 @@ const figmaDesigns = [
     tags: ['Mobile', 'UI'],
     color: '#F24E1E',
     embed: 'https://embed.figma.com/design/e5HhR7TYnWsvpKJBo1MKde/Untitled?node-id=4-2&embed-host=share',
-    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776340353/Slice_13_swo8bg.png',
+    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_500,q_auto,f_auto/v1776340353/Slice_13_swo8bg.png',
   },
   {
     title: 'Movie website design',
@@ -135,7 +134,7 @@ const figmaDesigns = [
     tags: ['Dashboard', 'UI/UX'],
     color: '#1ABCFE',
     embed: 'https://embed.figma.com/design/e5HhR7TYnWsvpKJBo1MKde/Untitled?node-id=4-2&embed-host=share',
-    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776340632/slice_14_rvjgeq.png',
+    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_500,q_auto,f_auto/v1776340632/slice_14_rvjgeq.png',
   },
   {
     title: 'E-commerce Product Page',
@@ -143,7 +142,7 @@ const figmaDesigns = [
     tags: ['E-commerce', 'UI'],
     color: '#0ACF83',
     embed: 'https://embed.figma.com/design/e5HhR7TYnWsvpKJBo1MKde/Untitled?node-id=4-2&embed-host=share',
-    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776340880/Slice_15_h1zt2p.png',
+    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_500,q_auto,f_auto/v1776340880/Slice_15_h1zt2p.png',
   },
   {
     title: 'shoe store design',
@@ -151,7 +150,7 @@ const figmaDesigns = [
     tags: ['UI/UX', 'Web'],
     color: '#FACC15',
     embed: 'https://embed.figma.com/design/e5HhR7TYnWsvpKJBo1MKde/Untitled?node-id=4-2&embed-host=share',
-    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776341052/slice_16_cyv84n.png',
+    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_500,q_auto,f_auto/v1776341052/slice_16_cyv84n.png',
   },
   {
     title: 'Mall website design',
@@ -159,7 +158,7 @@ const figmaDesigns = [
     tags: ['UI/UX', 'Web'],
     color: '#1ABCFE',
     embed: 'https://embed.figma.com/design/e5HhR7TYnWsvpKJBo1MKde/Untitled?node-id=4-2&embed-host=share',
-    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/v1776341217/slice_17_jqwbfu.png',
+    thumb: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_500,q_auto,f_auto/v1776341217/slice_17_jqwbfu.png',
   }
 ];
 
@@ -226,7 +225,7 @@ function ProjectCard({ project, index }) {
       {/* Thumbnail */}
       <div className="relative overflow-hidden" style={{ aspectRatio: '16/9', background: '#050507' }}>
         {project.image
-          ? <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top"
+          ? <img src={project.image} alt={project.title} loading="lazy" className="w-full h-full object-cover object-top"
               style={{ filter: hovered ? 'brightness(.55)' : 'brightness(.8)', transition: 'filter .3s' }}
               onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
           : null
@@ -308,7 +307,7 @@ function FigmaCard({ design, index, onClick }) {
       {/* Thumbnail */}
       <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
         {design.thumb
-          ? <img src={design.thumb} alt={design.title} className="w-full h-full object-cover"
+          ? <img src={design.thumb} alt={design.title} loading="lazy" className="w-full h-full object-cover"
               style={{ filter: hovered ? 'brightness(.6)' : 'brightness(.85)', transition: 'filter .3s' }} />
           : (
             <div className="w-full h-full flex items-center justify-center"

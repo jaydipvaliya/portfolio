@@ -61,7 +61,7 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}>
               <div className="relative w-24 h-24 overflow-hidden rounded-full" style={{ border: '2px solid rgba(255,255,255,0.1)' }}>
-                <img src="https://res.cloudinary.com/dg4c3rylm/image/upload/v1776188220/profile_mytks0.png"
+                <img src="https://res.cloudinary.com/dg4c3rylm/image/upload/w_200,q_auto,f_auto/v1776188220/profile_mytks0.png"
                   alt="Jaydip Valiya"
                   loading="eager"
                   className="w-full h-full object-cover object-center" />
@@ -117,8 +117,9 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}>
             <div className="relative overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)', aspectRatio: '3/4' }}>
               <div className="absolute inset-0">
-                <img src="https://res.cloudinary.com/dg4c3rylm/image/upload/v1776188220/profile_mytks0.png" alt="Jaydip Valiya — Full-Stack Developer from Gujarat, India"
+                <img src="https://res.cloudinary.com/dg4c3rylm/image/upload/w_400,q_auto,f_auto/v1776188220/profile_mytks0.png" alt="Jaydip Valiya — Full-Stack Developer from Gujarat, India"
                   loading="eager"
+                  fetchpriority="high"
                   width="300"
                   height="400"
                   className="w-full h-full object-cover object-center brightness-75"

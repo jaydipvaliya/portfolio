@@ -51,6 +51,16 @@
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="preconnect" href="https://d8it4huxumps7.cloudfront.net" crossorigin />
+
+    <!-- Fonts — loaded as stylesheet (non-blocking) instead of CSS @import -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" /></noscript>
+
+    <!-- Preload LCP image (hero profile) -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dg4c3rylm/image/upload/w_400,q_auto,f_auto/v1776188220/profile_mytks0.png" fetchpriority="high" />
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="google28c71a90cda1f0fc" />
