@@ -102,7 +102,7 @@ export default function Hero() {
                   Get in Touch
                 </button>
                 <a
-                  href="/resume.pdf" target="_blank" rel="noopener noreferrer"
+                  href="/resume1.pdf" target="_blank" rel="noopener noreferrer"
                   className="flex-1 md:flex-none px-5 md:px-6 py-3 text-sm font-semibold text-white border border-white/20 hover:border-white/50 transition-colors flex items-center justify-center gap-2 cursor-pointer"
                   aria-label="View Jaydip's resume">
                   View Resume
