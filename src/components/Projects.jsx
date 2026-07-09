@@ -1,10 +1,34 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Youtube, Globe, X, ExternalLink } from 'lucide-react';
+import { Github, Youtube, Globe, X, ExternalLink, FileText } from 'lucide-react';
 
 /* ─── Project Data ─────────────────────────────────────────── */
 const projects = [
   // ── Fullstack
+  {
+    title: 'LinkLy',
+    desc: 'A lightweight CRM designed for micro-businesses — kirana shops, tailors, tutors, salons, and local service providers — with deep WhatsApp integration, AI automation, and PWA support.',
+    tech: ['React', 'Node.js', 'MongoDB', 'WhatsApp API'],
+    category: 'Fullstack',
+    github: 'https://github.com/jaydipvaliya/linkLy',
+    youtube: null,
+    live: 'https://link-ly-dusky.vercel.app',
+    docs: 'https://documenter.getpostman.com/view/50839173/2sBXqMKLEB',
+    image: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_600,q_auto,f_auto/v1783607894/Screenshot_2026-07-09_200644_fm41al.png',
+    color: '#4CC9F0',
+  },
+  {
+    title: 'GO-Epic',
+    desc: 'A full-featured backend REST API powering a Go programming challenge platform — think LeetCode, but exclusively for the Go language.',
+    tech: ['Go', 'REST API', 'PostgreSQL'],
+    category: 'Fullstack',
+    github: 'https://github.com/jaydipvaliya/go_epic_jaydip_valiya',
+    youtube: null,
+    live: 'https://go-epic-jv.vercel.app',
+    docs: 'https://documenter.getpostman.com/view/50839173/2sBXwtqq3L',
+    image: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_600,q_auto,f_auto/v1783608047/Screenshot_2026-07-09_200806_he4pw0.png',
+    color: '#A78BFA',
+  },
   {
     title: 'Ekagra App',
     desc: 'A productivity and focus app built with React and Node.js to help users manage tasks and eliminate distractions.',
@@ -12,99 +36,10 @@ const projects = [
     category: 'Fullstack',
     github: 'https://github.com/jaydipvaliya/Ekagra-app',
     youtube: 'https://youtu.be/pI5THUR-pGQ?si=EEZYXYS2Ok-YN-2J',
-    live: 'https://ekagra-app-zjbl.vercel.app/',
+    live: 'https://ekagra-app.vercel.app',
+    docs: null,
     image: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_600,q_auto,f_auto/v1776339181/Ekagra_app_jdyyn4.png',
-    color: '#4CC9F0',
-  },
-  {
-    title: 'Udaan Clone',
-    desc: 'Full-stack e-commerce clone inspired by Udaan B2B platform with product listings and cart management.',
-    tech: ['React', 'Express', 'MongoDB'],
-    category: 'Fullstack',
-    github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/udaan%20clone.cg',
-    youtube: 'https://youtu.be/YlrkHHWErt4?si=uJcluyQjyJlq22-I',
-    live: 'https://udaan-clone.netlify.app/',
-    image: 'https://research-assets.cbinsights.com/2022/01/07091403/udaan-1-768x342.png?w=256',
-    color: '#A78BFA',
-  },
-  // ── Clones
-  {
-    title: 'Bentley Clone',
-    desc: 'A pixel-perfect clone of the Bentley Motors website showcasing advanced CSS animations and responsive design.',
-    tech: ['HTML', 'CSS', 'JavaScript'],
-    category: 'Clones',
-    github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/Bentali%20clone.cg',
-    youtube: 'https://youtu.be/edL_sEMZXbQ?si=fWYvylWvNSlJXXmC',
-    live: 'https://bentley-clone.netlify.app/',
-    image: 'https://mir-s3-cdn-cf.behance.net/project_modules/fs/68ce0e81497589.5d013167b8e56.png',
-    color: '#FB923C',
-  },
-  {
-    title: 'DJI Clone',
-    desc: "Frontend clone of DJI's product landing page with smooth scroll animations and interactive product showcases.",
-    tech: ['HTML', 'CSS', 'JavaScript'],
-    category: 'Clones',
-    github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/dji%20clone.cg',
-    youtube: 'https://youtu.be/dGQqi107MLU?si=2Fn0qQTs_Ocjk-YK',
-    live: 'https://dji-clone-project.netlify.app/',
-    image: 'https://tse2.mm.bing.net/th/id/OIP.1HQqLztkn2xzGPXPgDaSmQHaEo?rs=1&pid=ImgDetMain&o=7&rm=3',
-    color: '#60A5FA',
-  },
-  {
-    title: 'Drop Clone',
-    desc: 'Frontend clone of the Dropbox landing page with responsive layout and clean modern design.',
-    tech: ['HTML', 'CSS'],
-    category: 'Clones',
-    github: 'https://github.com/jaydipvaliya/clone_project_repo/tree/main/drop%20clone.cg',
-    youtube: 'https://youtu.be/MmYtvzlxMsc?si=qJ88uS46DfoMDVVn',
-    live: 'https://drop-clone.netlify.app/',
-    image: 'https://res.cloudinary.com/dg4c3rylm/image/upload/w_600,q_auto,f_auto/v1776339497/drop_clone_objrhc.png',
     color: '#34D399',
-  },
-  // ── Games
-  {
-    title: 'Memory Flip Game',
-    desc: 'Classic memory card-matching game with multiple difficulty levels, score tracking, and smooth flip animations.',
-    tech: ['JavaScript', 'HTML', 'CSS'],
-    category: 'Games',
-    github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/memory%20flip%20card%20game',
-    youtube: null,
-    live: 'https://gamethron-memory-flip.netlify.app/',
-    image: 'https://user-images.githubusercontent.com/101303690/197692380-23583000-8f62-4f5f-b3c7-d818325f5377.png',
-    color: '#4ADE80',
-  },
-  {
-    title: 'Color Guessing Zone',
-    desc: 'Interactive color guessing game — train your eye for exact RGB values with a leaderboard and timer.',
-    tech: ['JavaScript', 'HTML', 'CSS'],
-    category: 'Games',
-    github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/color%20guessing',
-    youtube: null,
-    live: 'https://gamethron-color-gassing.netlify.app/',
-    image: 'https://foolishdeveloper.com/wp-content/uploads/2024/05/thumbnail-12.png',
-    color: '#FACC15',
-  },
-  {
-    title: 'Whack-a-Mole',
-    desc: 'Browser-based arcade game with increasing speed levels and high score tracking.',
-    tech: ['JavaScript', 'HTML', 'CSS'],
-    category: 'Games',
-    github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/Whack-a-Mole',
-    youtube: null,
-    live: 'https://gamethron-wake-a-mole.netlify.app/',
-    image: 'https://www.sourcecodester.com/sites/default/files/images/rems/wam.png',
-    color: '#F472B6',
-  },
-  {
-    title: 'Click Counter',
-    desc: 'Minimalist click-counter app with animated count display, reset functionality, and keyboard shortcuts.',
-    tech: ['JavaScript', 'HTML', 'CSS'],
-    category: 'Games',
-    github: 'https://github.com/jaydipvaliya/game-project-repo/tree/main/clickcount',
-    youtube: null,
-    live: 'https://gamethron-click-count.netlify.app/',
-    image: 'https://tse3.mm.bing.net/th/id/OIP.GFixrrYXBSzkqC9-IV4AiQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3',
-    color: '#FB923C',
   },
 ];
 
@@ -163,8 +98,8 @@ const figmaDesigns = [
 ];
 
 /* ─── Categories ──────────────────────────────────────────── */
-const CATEGORIES = ['All', 'Fullstack', 'Clones', 'Games', 'Figma'];
-const CAT_COLORS  = { All: '#fff', Fullstack: '#4CC9F0', Clones: '#FB923C', Games: '#4ADE80', Figma: '#A259FF' };
+const CATEGORIES = ['All', 'Fullstack', 'Figma'];
+const CAT_COLORS  = { All: '#fff', Fullstack: '#4CC9F0', Figma: '#A259FF' };
 
 /* ─── Gradient fallback per project ──────────────────────── */
 function GradientThumb({ color, title }) {
@@ -248,7 +183,8 @@ function ProjectCard({ project, index }) {
               <>
                 <CircleBtn href={project.github}  icon={Github}  bg="#1a1a1a"     delay={0}    />
                 {project.live    && <CircleBtn href={project.live}    icon={Globe}   bg={project.color} delay={0.07} />}
-                {project.youtube && <CircleBtn href={project.youtube} icon={Youtube} bg="#E50914"  delay={0.14} />}
+                {project.docs    && <CircleBtn href={project.docs}    icon={FileText} bg="#FF6C37"  delay={0.14} />}
+                {project.youtube && <CircleBtn href={project.youtube} icon={Youtube} bg="#E50914"  delay={0.21} />}
               </>
             )}
           </AnimatePresence>
